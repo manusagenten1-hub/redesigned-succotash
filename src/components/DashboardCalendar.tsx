@@ -41,7 +41,9 @@ export default function DashboardCalendar() {
 
     const eventsMap: Record<string, CalendarEvent[]> = {};
     agendaEvents.forEach(event => {
-      const dateStr = new Date(event.date).toISOString().split('T')[0];
+      if (event.status === 'Concluído') return;
+      const d = new Date(event.date);
+      const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
       if (!eventsMap[dateStr]) {
         eventsMap[dateStr] = [];
       }
@@ -111,7 +113,7 @@ export default function DashboardCalendar() {
       
       <div className="grid grid-cols-7 gap-px bg-white/10 border border-white/10 rounded-b-xl overflow-hidden mb-6">
         {days.map((date, index) => {
-          const dateStr = date ? new Date(date).toISOString().split('T')[0] : '';
+          const dateStr = date ? `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}` : '';
           const dayEvents = dateStr ? (eventsByDay[dateStr] || []) : [];
           
           return (
