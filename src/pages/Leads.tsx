@@ -233,14 +233,13 @@ export default function Leads() {
                     <tr key={lead.id} className="hover:bg-white/[0.04] transition-colors group">
                       <td className="p-4">
                         <div className="flex flex-col items-start">
-                          <div className="font-bold text-white flex items-center gap-2">
-                            {lead.name}
+                          <div className="font-bold text-white flex items-center gap-2 text-base">
+                            {lead.companyName || 'Empresa não informada'}
                             {lead.isHot && <Flame size={14} className="text-orange-500" title="Lead Quente" />}
                             {lead.needsFollowUp && <AlertCircle size={14} className="text-red-400" title="Precisando de Follow-up" />}
                           </div>
                           <div className="flex items-center gap-1.5 text-xs text-gray-400 mt-1">
-                            <Building size={12} className="opacity-70" />
-                            <span className="truncate max-w-[150px]">{lead.companyName || 'Empresa não informada'}</span>
+                            <span className="truncate max-w-[150px]">{lead.name}</span>
                             <span className="opacity-50 mx-1">•</span>
                             <span className="truncate">{lead.source}</span>
                           </div>
@@ -375,8 +374,9 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !whatsapp) return;
-    onSave({ name, companyName, whatsapp, source, status, notes });
+    if (!whatsapp) return;
+    const finalName = name.trim() ? name : 'Sem nome';
+    onSave({ name: finalName, companyName, whatsapp, source, status, notes });
     onClose();
   };
 
@@ -390,10 +390,9 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-gray-400">Nome do Lead <span className="text-red-400">*</span></label>
+              <label className="text-xs font-medium text-gray-400">Nome do Lead (Opcional)</label>
               <input 
                 type="text" 
-                required 
                 value={name} 
                 onChange={e => setName(e.target.value)}
                 className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
