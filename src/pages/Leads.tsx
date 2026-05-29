@@ -54,7 +54,10 @@ export default function Leads() {
   };
 
   const formatPhone = (phone: string) => {
-    const clean = phone.replace(/\D/g, '');
+    let clean = phone.replace(/\D/g, '');
+    if (clean.startsWith('55') && (clean.length === 12 || clean.length === 13)) {
+      clean = clean.slice(2);
+    }
     if (clean.length === 11) {
       return `${clean.slice(0, 2)} ${clean.slice(2, 7)}-${clean.slice(7)}`;
     } else if (clean.length === 10) {
