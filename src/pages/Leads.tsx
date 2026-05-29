@@ -102,7 +102,7 @@ export default function Leads() {
       
       const daysSinceLastInteraction = Math.floor((now.getTime() - lastInteractionDate.getTime()) / (1000 * 3600 * 24));
       
-      const isHot = lead.status === 'Negociação' || lead.status === 'Proposta Enviada';
+      const isHot = lead.status === 'Reunião Marcada' || lead.status === 'Negociação' || lead.status === 'Proposta Enviada';
       const noResponse = lead.status === 'Contato Iniciado' && daysSinceLastInteraction > 3;
       const needsFollowUp = ['Novo Lead', 'Contato Iniciado', 'Negociação', 'Proposta Enviada'].includes(lead.status) && daysSinceLastInteraction > 5 && !nextAction;
 
@@ -140,7 +140,12 @@ export default function Leads() {
     <div className="space-y-6 h-full flex flex-col">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white">Funil de Leads</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-3">
+            Funil de Leads
+            <span className="text-sm font-medium bg-white/10 text-gray-300 px-2.5 py-1 rounded-full">
+              {leads.length} {leads.length === 1 ? 'Lead' : 'Leads'}
+            </span>
+          </h1>
           <p className="text-gray-300 mt-1">Gestão rápida e automatizada de contatos.</p>
         </div>
         
