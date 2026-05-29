@@ -29,7 +29,7 @@ interface AppContextType {
   sales: Sale[]; addSale: (s: Omit<Sale, 'id' | 'date' | 'createdBy'>, c?: Omit<Commission, 'id' | 'date' | 'status' | 'saleId'>[]) => void; deleteSale: (id: string) => void;
   members: Member[]; addMember: (m: Omit<Member, 'id' | 'token'>) => Member; updateMember: (id: string, u: Partial<Omit<Member, 'id'>>) => void; togglePinMember: (id: string) => void; deleteMember: (id: string) => void;
   expenses: Expense[]; addExpense: (e: Omit<Expense, 'id' | 'date' | 'createdBy'>) => void; toggleExpenseStatus: (id: string) => void; deleteExpense: (id: string) => void;
-  leads: Lead[]; addLead: (l: Omit<Lead, 'id' | 'date' | 'createdBy'>) => void; updateLead: (id: string, u: Partial<Omit<Lead, 'id' | 'date' | 'createdBy'>>) => void; deleteLead: (id: string) => void;
+  leads: Lead[]; addLead: (l: Omit<Lead, 'id' | 'date' | 'createdBy'>) => void; addMultipleLeads: (lDataList: Omit<Lead, 'id' | 'date' | 'createdBy'>[]) => Promise<void>; updateLead: (id: string, u: Partial<Omit<Lead, 'id' | 'date' | 'createdBy'>>) => void; deleteLead: (id: string) => void;
   clients: Client[]; updateClientStatus: (id: string, s: ClientStatus) => void; deleteClient: (id: string) => void;
   agendaEvents: CalendarEvent[]; addAgendaEvent: (e: Omit<CalendarEvent, 'id' | 'status' | 'createdBy'>) => void; updateAgendaEventStatus: (id: string, s: EventStatus) => void; deleteAgendaEvent: (id: string) => void;
   commissions: Commission[]; addCommission: (c: Omit<Commission, 'id' | 'date' | 'status'>) => void; updateCommissionStatus: (id: string, s: 'Pendente' | 'Pago') => void; deleteCommission: (id: string) => void;
@@ -215,6 +215,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setLeads(p => [n, ...p]); runInsert('leads', lTo(n));
     logActivity({ type: 'ADD_LEAD', description: `${cu.name} adicionou um novo lead: ${lData.name}` });
   };
+  const addMultipleLeads = async (lDataList: Omit<Lead, 'id' | 'date' | 'createdBy'>[]) => {
+    const cu = getCurrentUser();
+    const newLeads = lDataList.map(lData => ({
+      ...lData,
+      id: Math.random().toString(36).substr(2, 9),
+      date: new Date().toISOString(),
+      createdBy: cu.id
+    }));
+    
+    setLeads(p => [...newLeads, ...p]);
+    await supabase.from('leads').insert(newLeads.map(lTo));
+    logActivity({ type: 'ADD_LEAD', description: `${cu.name} adicionou ${newLeads.length} novos leads em lote.` });
+  };
   const updateLead = (id: string, u: Partial<Omit<Lead, 'id' | 'date' | 'createdBy'>>) => {
     setLeads(p => p.map(l => l.id === id ? { ...l, ...u } : l));
     const up: any = {};
@@ -305,7 +318,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       sales, addSale, deleteSale,
       members, addMember, updateMember, togglePinMember, deleteMember,
       expenses, addExpense, toggleExpenseStatus, deleteExpense,
-      leads, addLead, updateLead, deleteLead,
+      leads, addLead, addMultipleLeads, updateLead, deleteLead,
       clients, updateClientStatus, deleteClient,
       agendaEvents, addAgendaEvent, updateAgendaEventStatus, deleteAgendaEvent,
       commissions, addCommission, updateCommissionStatus, deleteCommission,
