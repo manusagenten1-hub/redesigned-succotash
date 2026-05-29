@@ -26,13 +26,14 @@ const STATUS_COLORS: Record<LeadStatus, { bg: string, text: string, border: stri
 };
 
 export default function Leads() {
-  const { leads, updateLead, deleteLead, addLead, agendaEvents, members } = useAppContext();
+  const { leads, updateLead, deleteLead, addLead, addMultipleLeads, agendaEvents, members } = useAppContext();
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<LeadStatus | 'Todos'>('Todos');
   const [quickFilter, setQuickFilter] = useState<'Todos' | 'Sem Resposta' | 'Sem Follow-up' | 'Quentes'>('Todos');
   
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
   const [leadToEdit, setLeadToEdit] = useState<Lead | null>(null);
 
   const openAddModal = () => {
@@ -164,6 +165,12 @@ export default function Leads() {
           </div>
 
           <button
+            onClick={() => setIsBulkModalOpen(true)}
+            className="flex-shrink-0 flex items-center justify-center bg-white/5 hover:bg-white/10 text-white px-4 h-10 rounded-lg font-medium transition-all border border-white/10 gap-2"
+          >
+            <span>Importação em Massa</span>
+          </button>
+          <button
             onClick={openAddModal}
             className="flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 text-white px-4 h-10 rounded-lg font-medium transition-all shadow-lg shadow-nexora-neon/20 gap-2"
           >
@@ -221,7 +228,7 @@ export default function Leads() {
       {/* List View */}
       <div className="bg-nexora-card border border-white/5 rounded-2xl shadow-lg flex-1 overflow-hidden flex flex-col">
         <div className="overflow-x-auto flex-1">
-          <table className="w-full text-left border-collapse whitespace-nowrap min-w-[900px]">
+          <table className="w-full text-left border-collapse whitespace-nowrap min-w-[1050px]">
             <thead>
               <tr className="bg-white/5 border-b border-white/5 text-xs uppercase tracking-wider font-bold text-gray-200">
                 <th className="p-4 font-medium w-[25%]">Lead & Empresa</th>
@@ -388,6 +395,16 @@ export default function Leads() {
           initialData={leadToEdit}
         />
       )}
+
+      {isBulkModalOpen && (
+        <BulkLeadModal 
+          onClose={() => setIsBulkModalOpen(false)} 
+          onSave={async (leadsData) => {
+            await addMultipleLeads(leadsData);
+            setIsBulkModalOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -508,6 +525,137 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  )
+}
+
+// -------------------------------------------------------------
+// BULK ADD MODAL
+// -------------------------------------------------------------
+function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data: Omit<Lead, 'id'|'date'|'createdBy'>[]) => Promise<void> }) {
+  const [rawText, setRawText] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [source, setSource] = useState(PREDEFINED_SOURCES[0]);
+  const [status, setStatus] = useState<LeadStatus>('Novo Lead');
+
+  const handleProcess = async () => {
+    if (!rawText.trim()) return;
+    setIsProcessing(true);
+    
+    // Flexible parser: supports alternating lines (Name \n Phone) or single line.
+    
+    const lines = rawText.split('\n').map(l => l.trim()).filter(Boolean);
+    const leadsToInsert: Omit<Lead, 'id'|'date'|'createdBy'>[] = [];
+    
+    let pendingName = '';
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const digitCount = line.replace(/[^\d]/g, '').length;
+      const isPhoneLike = digitCount >= 8 && (digitCount / line.length) > 0.3;
+
+      if (line.includes(',')) {
+        if (pendingName) {
+           leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, notes: 'Importado em massa' });
+           pendingName = '';
+        }
+        const parts = line.split(',').map(p => p.trim());
+        const name = parts[0] || 'Sem nome';
+        let companyName = '';
+        let whatsapp = '';
+        if (parts.length >= 3) {
+          companyName = parts[1];
+          whatsapp = parts[2];
+        } else if (parts.length === 2) {
+          whatsapp = parts[1];
+        }
+        leadsToInsert.push({ name, companyName, whatsapp, source, status, notes: 'Importado em massa' });
+      } else if (isPhoneLike) {
+        const companyName = pendingName || '';
+        leadsToInsert.push({ name: 'Sem nome', companyName, whatsapp: line, source, status, notes: 'Importado em massa' });
+        pendingName = '';
+      } else {
+        if (pendingName) {
+           leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, notes: 'Importado em massa' });
+        }
+        pendingName = line;
+      }
+    }
+
+    if (pendingName) {
+      leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, notes: 'Importado em massa' });
+    }
+
+    if (leadsToInsert.length > 0) {
+      await onSave(leadsToInsert);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm overflow-y-auto">
+      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+        <div className="p-6 border-b border-white/5 flex flex-col pt-8">
+          <h2 className="text-xl font-bold text-white">Importação em Massa</h2>
+          <p className="text-sm text-gray-400 mt-1">Cole seus leads abaixo para automatizar o cadastro.</p>
+        </div>
+        <div className="p-6 space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-gray-400">Cole seus leads</label>
+            <p className="text-[11px] text-gray-500 mb-2">Pode ser no formato "Nome, Telefone" ou em linhas alternadas (Linha 1: Nome, Linha 2: Telefone).</p>
+            <textarea 
+              value={rawText} 
+              onChange={e => setRawText(e.target.value)}
+              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-3 text-sm text-white focus:outline-none focus:border-nexora-neon h-48 font-mono text-xs whitespace-pre"
+              placeholder={'Di Caputti Pizza Bar\n+55 92 98212-1514\nPorp\'s Pizza\n+55 91 98554-8400'}
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-gray-400">Origem Padrão</label>
+              <select 
+                value={source}
+                onChange={e => setSource(e.target.value)}
+                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+              >
+                {PREDEFINED_SOURCES.map(s => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-gray-400">Status Inicial</label>
+              <select 
+                value={status}
+                onChange={e => setStatus(e.target.value as LeadStatus)}
+                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+              >
+                {LEAD_STATUSES.map(s => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="pt-4 mt-2 border-t border-white/5 flex justify-end gap-3">
+            <button 
+              type="button" 
+              onClick={onClose}
+              disabled={isProcessing}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors disabled:opacity-50"
+            >
+              Cancelar
+            </button>
+            <button 
+              onClick={handleProcess}
+              disabled={!rawText.trim() || isProcessing}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
+            >
+              {isProcessing ? 'Importando...' : 'Processar e Importar'}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )
