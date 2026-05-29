@@ -53,6 +53,16 @@ export default function Leads() {
     return `https://wa.me/${clean}`;
   };
 
+  const formatPhone = (phone: string) => {
+    const clean = phone.replace(/\D/g, '');
+    if (clean.length === 11) {
+      return `${clean.slice(0, 2)} ${clean.slice(2, 7)}-${clean.slice(7)}`;
+    } else if (clean.length === 10) {
+      return `${clean.slice(0, 2)} ${clean.slice(2, 6)}-${clean.slice(6)}`;
+    }
+    return phone;
+  };
+
   // Quick Action Handlers
   const handleAction = (lead: Lead, action: 'contact' | 'meeting' | 'negotiate' | 'won' | 'lost') => {
     if (action === 'contact') {
@@ -207,16 +217,17 @@ export default function Leads() {
             <thead>
               <tr className="bg-white/5 border-b border-white/5 text-xs uppercase tracking-wider font-bold text-gray-200">
                 <th className="p-4 font-medium w-[25%]">Lead & Empresa</th>
+                <th className="p-4 font-medium w-[15%]">Contato</th>
                 <th className="p-4 font-medium w-[15%]">Status Atual</th>
                 <th className="p-4 font-medium w-[20%]">Interações</th>
-                <th className="p-4 font-medium w-[15%]">Responsável</th>
-                <th className="p-4 font-medium w-[25%] text-right">Ações Rápidas</th>
+                <th className="p-4 font-medium w-[10%]">Responsável</th>
+                <th className="p-4 font-medium w-[15%] text-right">Ações Rápidas</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5 text-sm">
               {filteredLeads.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-12 text-center text-gray-400">
+                  <td colSpan={6} className="p-12 text-center text-gray-400">
                     <div className="flex flex-col items-center justify-center">
                       <SearchX size={48} className="text-gray-400 mb-3" />
                       <p className="text-base font-medium text-gray-400">Nenhum lead encontrado com estes filtros.</p>
@@ -243,6 +254,19 @@ export default function Leads() {
                             <span className="opacity-50 mx-1">•</span>
                             <span className="truncate">{lead.source}</span>
                           </div>
+                        </div>
+                      </td>
+
+                      <td className="p-4">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-gray-200 whitespace-nowrap">{formatPhone(lead.whatsapp)}</span>
+                          <button 
+                            onClick={() => window.open(formatWhatsAppLink(lead.whatsapp), '_blank')}
+                            className="text-gray-400 hover:text-[#25D366] transition-colors p-1.5 bg-white/[0.03] hover:bg-[#25D366]/10 rounded-md border border-white/5"
+                            title="Chamar no WhatsApp (Sem alterar status)"
+                          >
+                            <MessageCircle size={14} />
+                          </button>
                         </div>
                       </td>
                       
