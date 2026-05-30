@@ -228,15 +228,15 @@ export default function Leads() {
       {/* List View */}
       <div className="bg-nexora-card border border-white/5 rounded-2xl shadow-lg flex-1 overflow-hidden flex flex-col">
         <div className="overflow-x-auto flex-1">
-          <table className="w-full text-left border-collapse whitespace-nowrap min-w-[1050px]">
+          <table className="w-full text-left border-collapse whitespace-nowrap min-w-[1150px]">
             <thead>
               <tr className="bg-white/5 border-b border-white/5 text-xs uppercase tracking-wider font-bold text-gray-200">
                 <th className="p-4 font-medium w-[25%]">Lead & Empresa</th>
                 <th className="p-4 font-medium w-[15%]">Contato</th>
                 <th className="p-4 font-medium w-[15%]">Status Atual</th>
-                <th className="p-4 font-medium w-[20%]">Interações</th>
+                <th className="p-4 font-medium w-[15%]">Interações</th>
                 <th className="p-4 font-medium w-[10%]">Responsável</th>
-                <th className="p-4 font-medium w-[15%] text-right">Ações Rápidas</th>
+                <th className="p-4 font-medium w-[20%] text-right pr-6">Ações Rápidas</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5 text-sm">
@@ -317,7 +317,7 @@ export default function Leads() {
                         {lead.ownerName}
                       </td>
 
-                      <td className="p-4">
+                      <td className="p-4 pr-6">
                         <div className="flex items-center justify-end gap-1.5">
                           
                           {/* Quick Actions Bar */}
