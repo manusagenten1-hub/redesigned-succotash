@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useAppContext, CalendarEvent, CalendarEventType, EventPriority } from '../context/AppContext';
+import { useAppContext, CalendarEvent, CalendarEventType, EventPriority, Lead } from '../context/AppContext';
 import { Calendar as CalendarIcon, Clock, AlertCircle, CheckCircle2, ChevronDown, Plus, Trash2, CalendarClock, User, Briefcase, CalendarDays, Check } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -224,7 +224,7 @@ const EventCard: React.FC<{ event: CalendarEvent }> = ({ event }) => {
         {(lead || client || member || event.description) && (
           <div className="text-sm text-gray-400 flex flex-wrap items-center gap-x-4 gap-y-2 mt-1">
             {lead && (
-              <span className="flex items-center gap-1.5"><TargetIcon /> Lead: {lead.name}</span>
+              <span className="flex items-center gap-1.5"><TargetIcon /> Lead: {lead.companyName || lead.name}</span>
             )}
             {client && (
               <span className="flex items-center gap-1.5"><Briefcase size={14} /> Cliente: {client.companyName}</span>
@@ -373,14 +373,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
           <div className="grid grid-cols-2 gap-4">
              <div className="space-y-1.5">
                <label className="text-xs font-medium text-gray-400">Vincular Lead (Opcional)</label>
-               <select 
-                 value={leadId}
-                 onChange={(e) => setLeadId(e.target.value)}
-                 className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
-               >
-                 <option value="">Nenhum lead...</option>
-                 {leads.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
-               </select>
+               <SearchableLeadSelect leads={leads} value={leadId} onChange={setLeadId} />
              </div>
              <div className="space-y-1.5">
                <label className="text-xs font-medium text-gray-400">Vincular Cliente (Opcional)</label>
@@ -434,6 +427,73 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
           </div>
         </form>
       </div>
+    </div>
+  )
+}
+
+// -------------------------------------------------------------
+// SEARCHABLE LEAD SELECT
+// -------------------------------------------------------------
+function SearchableLeadSelect({ leads, value, onChange }: { leads: Lead[], value: string, onChange: (id: string) => void }) {
+  const [search, setSearch] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const filtered = leads.filter(l => {
+     const text = `${l.companyName || ''} ${l.name || ''}`.toLowerCase();
+     return text.includes(search.toLowerCase());
+  });
+  
+  const selectedLead = leads.find(l => l.id === value);
+
+  return (
+    <div className="relative">
+      <div 
+         onClick={() => setIsOpen(!isOpen)}
+         className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer min-h-[38px]"
+      >
+        <span className="truncate pr-2">
+          {selectedLead ? (selectedLead.companyName || selectedLead.name) : 'Nenhum lead...'}
+        </span>
+        <ChevronDown size={14} className="text-gray-400 shrink-0" />
+      </div>
+      
+      {isOpen && (
+        <div className="absolute z-10 top-full mt-1 left-0 w-full bg-[#151f28] border border-white/10 rounded-lg shadow-xl overflow-hidden max-h-48 flex flex-col">
+          <input 
+            type="text"
+            placeholder="Buscar empresa ou lead..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="w-full bg-transparent border-b border-white/10 p-2 text-sm text-white focus:outline-none"
+            onClick={e => e.stopPropagation()}
+            autoFocus
+          />
+          <div className="overflow-y-auto flex-1 p-1">
+             <div 
+               className="p-2 text-sm text-gray-400 hover:bg-white/5 cursor-pointer rounded-md"
+               onClick={() => { onChange(''); setIsOpen(false); setSearch(''); }}
+             >
+               Nenhum lead...
+             </div>
+             {filtered.map(l => (
+               <div 
+                 key={l.id}
+                 className="p-2 text-sm text-white hover:bg-white/5 cursor-pointer rounded-md truncate"
+                 onClick={() => { onChange(l.id); setIsOpen(false); setSearch(''); }}
+               >
+                 {l.companyName || l.name}
+               </div>
+             ))}
+             {filtered.length === 0 && (
+               <div className="p-2 text-sm text-gray-500 text-center">Nenhum encontrado</div>
+             )}
+          </div>
+        </div>
+      )}
+      {/* Invisible backdrop to close on click outside */}
+      {isOpen && (
+        <div className="fixed inset-0 z-0" onClick={() => setIsOpen(false)} />
+      )}
     </div>
   )
 }
