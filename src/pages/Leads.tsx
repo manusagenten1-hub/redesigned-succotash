@@ -191,8 +191,8 @@ export default function Leads() {
           onChange={(e) => setStatusFilter(e.target.value as any)}
           className="bg-[#210606] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-gray-300 focus:outline-none focus:border-tecnova-neon appearance-none min-w-[150px]"
         >
-          <option value="Todos">Todos os Status</option>
-          {LEAD_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+          <option className="bg-[#210606] text-white" value="Todos">Todos os Status</option>
+          {LEAD_STATUSES.map(s => <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>)}
         </select>
 
         <div className="h-6 w-px bg-white/10 hidden sm:block mx-1"></div>
@@ -444,7 +444,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
                 type="text" 
                 value={name} 
                 onChange={e => setName(e.target.value)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                 placeholder="Ex: Carlos Oliveira"
               />
             </div>
@@ -454,7 +454,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
                 type="text" 
                 value={companyName} 
                 onChange={e => setCompanyName(e.target.value)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                 placeholder="Ex: Carlos LTDA"
               />
             </div>
@@ -467,7 +467,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
               required 
               value={whatsapp} 
               onChange={e => setWhatsapp(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
               placeholder="(11) 99999-9999"
             />
           </div>
@@ -478,10 +478,10 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
               <select 
                 value={source}
                 onChange={e => setSource(e.target.value)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {PREDEFINED_SOURCES.map(s => (
-                  <option key={s} value={s}>{s}</option>
+                  <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
                 ))}
               </select>
             </div>
@@ -490,10 +490,10 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
               <select 
                 value={status}
                 onChange={e => setStatus(e.target.value as LeadStatus)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {LEAD_STATUSES.map(s => (
-                  <option key={s} value={s}>{s}</option>
+                  <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
                 ))}
               </select>
             </div>
@@ -504,7 +504,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
             <textarea 
               value={notes} 
               onChange={e => setNotes(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon min-h-[80px]"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon min-h-[80px]"
               placeholder="Detalhes ou histórico do lead..."
             />
           </div>
@@ -606,7 +606,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
             <textarea 
               value={rawText} 
               onChange={e => setRawText(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-3 text-sm text-white focus:outline-none focus:border-tecnova-neon h-48 font-mono text-xs whitespace-pre"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-3 text-sm text-white focus:outline-none focus:border-tecnova-neon h-48 font-mono text-xs whitespace-pre"
               placeholder={'Di Caputti Pizza Bar\n+55 92 98212-1514\nPorp\'s Pizza\n+55 91 98554-8400'}
             />
           </div>
@@ -617,10 +617,10 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
               <select 
                 value={source}
                 onChange={e => setSource(e.target.value)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {PREDEFINED_SOURCES.map(s => (
-                  <option key={s} value={s}>{s}</option>
+                  <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
                 ))}
               </select>
             </div>
@@ -629,10 +629,10 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
               <select 
                 value={status}
                 onChange={e => setStatus(e.target.value as LeadStatus)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {LEAD_STATUSES.map(s => (
-                  <option key={s} value={s}>{s}</option>
+                  <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
                 ))}
               </select>
             </div>
