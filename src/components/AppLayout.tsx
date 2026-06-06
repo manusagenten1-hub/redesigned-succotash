@@ -29,7 +29,7 @@ const RewardModal = () => {
           angle: 120,
           spread: 55,
           origin: { x: 1 },
-          colors: ['#00d4ff', '#ffffff']
+          colors: ['#F31333', '#ffffff']
         });
 
         if (Date.now() < end) {
@@ -227,7 +227,7 @@ export const AppLayout = () => {
 
       {isSettingsOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/80 backdrop-blur-sm overflow-y-auto">
-          <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-6 border-b border-white/5">
               <h2 className="text-xl font-bold flex items-center gap-2">
                 <Settings size={20} className="text-[#F31333]" />
@@ -276,7 +276,7 @@ export const AppLayout = () => {
                   </div>
                   
                   <div className={cn(
-                    "flex items-center justify-center w-10 h-10 rounded-full text-[#F31333] transition-all cursor-pointer hover:bg-[#00e0ff]/20 bg-[#00e0ff]/10",
+                    "flex items-center justify-center w-10 h-10 rounded-full text-[#F31333] transition-all cursor-pointer hover:bg-[#F31333]/20 bg-[#F31333]/10",
                     isPlaying && "animate-pulse"
                   )} 
                     onClick={togglePlay}
