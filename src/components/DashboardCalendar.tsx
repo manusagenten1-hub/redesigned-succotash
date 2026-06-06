@@ -58,7 +58,7 @@ export default function DashboardCalendar() {
 
   const getEventDotColor = (type: CalendarEvent['type']) => {
     switch(type) {
-      case 'Reunião': return 'bg-blue-400';
+      case 'Reunião': return 'bg-red-500';
       case 'Follow-up': return 'bg-yellow-400';
       case 'Tarefa interna': return 'bg-purple-400';
       default: return 'bg-gray-400';
@@ -82,17 +82,17 @@ export default function DashboardCalendar() {
   }, [agendaEvents]);
 
   return (
-    <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-6 shadow-xl">
+    <div className="bg-[#210606] border border-white/10 rounded-2xl p-6 shadow-xl">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-bold flex items-center gap-2 text-white">
-          <CalendarIcon size={20} className="text-[#00d4ff]" />
+          <CalendarIcon size={20} className="text-[#F31333]" />
           Calendário de Agendamentos
         </h2>
         <div className="flex items-center gap-4">
           <span className="font-bold text-white">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </span>
-          <div className="flex gap-1 bg-[#151f28] rounded-lg p-1 border border-white/10">
+          <div className="flex gap-1 bg-[rgba(0,0,0,0.2)] rounded-lg p-1 border border-white/10">
             <button onClick={prevMonth} className="p-1 hover:bg-white/10 rounded-md text-gray-300 hover:text-white transition-colors">
               <ChevronLeft size={20} />
             </button>
@@ -105,7 +105,7 @@ export default function DashboardCalendar() {
 
       <div className="grid grid-cols-7 gap-px bg-white/10 rounded-t-xl overflow-hidden mb-px">
         {weekDays.map(day => (
-          <div key={day} className="bg-[#151f28] text-center text-xs font-bold text-gray-300 py-3 uppercase tracking-wider">
+          <div key={day} className="bg-[rgba(0,0,0,0.2)] text-center text-xs font-bold text-gray-300 py-3 uppercase tracking-wider">
             {day}
           </div>
         ))}
@@ -121,7 +121,7 @@ export default function DashboardCalendar() {
               key={index} 
               className={cn(
                 "min-h-[50px] p-1 transition-colors relative flex flex-col items-center",
-                date ? "bg-[#151f28]" : "bg-[#0b1016]",
+                date ? "bg-[rgba(0,0,0,0.2)]" : "bg-[rgba(0,0,0,0.5)]",
                 isToday(date) && "bg-[#1c2c3d]"
               )}
             >
@@ -130,7 +130,7 @@ export default function DashboardCalendar() {
                   <div className="flex justify-center mb-1">
                     <span className={cn(
                       "text-xs w-6 h-6 flex items-center justify-center rounded-full",
-                      isToday(date) ? "bg-nexora-neon text-[#020024] font-bold shadow-[0_0_10px_rgba(0,212,255,0.4)]" : "text-gray-300"
+                      isToday(date) ? "bg-tecnova-neon text-[#0a0a0a] font-bold shadow-[0_0_10px_rgba(243,19,51,0.4)]" : "text-gray-300"
                     )}>
                       {date.getDate()}
                     </span>
@@ -159,16 +159,16 @@ export default function DashboardCalendar() {
 
       <div>
         <h3 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
-          <Clock size={16} className="text-[#00d4ff]" />
+          <Clock size={16} className="text-[#F31333]" />
           Próximos Agendamentos
         </h3>
         
         <div className="space-y-3">
           {upcomingEvents.length === 0 ? (
-            <p className="text-sm text-gray-300 bg-[#151f28] p-3 rounded-lg border border-white/10 text-center">Nenhum evento futuro encontrado.</p>
+            <p className="text-sm text-gray-300 bg-[rgba(0,0,0,0.2)] p-3 rounded-lg border border-white/10 text-center">Nenhum evento futuro encontrado.</p>
           ) : (
             upcomingEvents.map(event => (
-               <div key={event.id} className="bg-[#151f28] border-l-2 border-r border-t border-b border-white/10 rounded-lg p-3 flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5"
+               <div key={event.id} className="bg-[rgba(0,0,0,0.2)] border-l-2 border-r border-t border-b border-white/10 rounded-lg p-3 flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5"
                     style={{ borderLeftColor: getEventDotColor(event.type).replace('bg-', '') }}>
                  <div className="flex justify-between items-start">
                    <div className="flex items-center gap-2">
