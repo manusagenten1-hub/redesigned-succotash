@@ -8,7 +8,7 @@ import {
 import { DollarSign, TrendingUp, CreditCard, Activity, ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import DashboardCalendar from '../components/DashboardCalendar';
 
-const COLORS = ['#00d4ff', '#3b82f6', '#8b5cf6', '#ec4899', '#10b981'];
+const COLORS = ['#F31333', '#E60000', '#8b5cf6', '#ec4899', '#10b981'];
 
 export default function Dashboard() {
   const { sales, expenses, goals } = useAppContext();
@@ -111,8 +111,8 @@ export default function Dashboard() {
           title="Faturamento Bruto" 
           value={formatSec(grossRevenue)} 
           icon={<ArrowUpRight size={16} />}
-          gradient="from-blue-500/30 to-transparent"
-          textColor="text-nexora-neon"
+          gradient="from-red-500/30 to-transparent"
+          textColor="text-tecnova-neon"
         />
         <MetricCard 
           title="Despesas Totais" 
@@ -136,8 +136,8 @@ export default function Dashboard() {
           title="MRR (Receita Recorrente)" 
           value={formatSec(currentMRR)} 
           icon={<TrendingUp size={16} />}
-          gradient="from-blue-500/10 to-transparent"
-          textColor="text-blue-400"
+          gradient="from-red-500/10 to-transparent"
+          textColor="text-red-400"
         />
         <MetricCard 
           title="Despesas Fixas (Mês)" 
@@ -150,7 +150,7 @@ export default function Dashboard() {
           title="Previsão Fluxo (Mês)" 
           value={formatSec(estimatedMonthlyProfit)} 
           icon={<Activity size={16} />}
-          gradient="from-emerald-500/10 to-transparent"
+          gradient="from-green-500/10 to-transparent"
           textColor={estimatedMonthlyProfit >= 0 ? "text-emerald-400" : "text-rose-400"}
         />
       </div>
@@ -161,26 +161,26 @@ export default function Dashboard() {
           {goals.map(goal => {
             const { progressValue, percentage } = calculateGoalProgress(goal);
             return (
-              <div key={goal.id} className="bg-[#0f1720] border border-white/10 shadow-lg rounded-xl p-5 flex items-center justify-between">
+              <div key={goal.id} className="bg-[#210606] border border-white/10 shadow-lg rounded-xl p-5 flex items-center justify-between">
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-sm font-bold text-white">Meta {goal.period} de {goal.type}</h3>
-                    <span className="text-xs font-bold text-[#00d4ff]">{goal.type === 'Faturamento' ? formatSec(progressValue) : progressValue} <span className="text-gray-300 font-medium">/ {goal.type === 'Faturamento' ? formatSec(goal.amount) : goal.amount}</span></span>
+                    <span className="text-xs font-bold text-[#F31333]">{goal.type === 'Faturamento' ? formatSec(progressValue) : progressValue} <span className="text-gray-300 font-medium">/ {goal.type === 'Faturamento' ? formatSec(goal.amount) : goal.amount}</span></span>
                   </div>
-                  <div className="w-full bg-[#151f28] rounded-full h-2.5 overflow-hidden border border-white/10">
+                  <div className="w-full bg-[rgba(0,0,0,0.2)] rounded-full h-2.5 overflow-hidden border border-white/10">
                     <div 
-                      className="bg-[#00d4ff] h-full rounded-full transition-all" 
+                      className="bg-[#F31333] h-full rounded-full transition-all" 
                       style={{ width: `${percentage}%` }}
                     ></div>
                   </div>
                   <div className="mt-2 text-xs text-gray-300">
-                    <span className="text-[#00d4ff] font-bold">{percentage.toFixed(1)}%</span> atingida
+                    <span className="text-[#F31333] font-bold">{percentage.toFixed(1)}%</span> atingida
                   </div>
                 </div>
                 <div className="pl-6 border-l border-white/10 ml-6">
                   <Link 
                     to="/metas"
-                    className="text-xs font-bold bg-[#151f28] border border-white/10 hover:bg-[#1c2c3d] text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap inline-block shadow-md"
+                    className="text-xs font-bold bg-[rgba(0,0,0,0.2)] border border-white/10 hover:bg-[#1c2c3d] text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap inline-block shadow-md"
                   >
                     Ver Meta
                   </Link>
@@ -194,15 +194,15 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 pt-6">
         <div className="xl:col-span-2 space-y-6">
           {/* Main Chart */}
-          <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <div className="bg-[#210606] border border-white/10 rounded-2xl p-6 shadow-xl relative overflow-hidden">
             <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-white">Fluxo de Caixa <span className="text-sm font-medium text-gray-400">(Receitas x Despesas)</span></h2>
             <div className="h-[300px] w-full mt-4">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={cashFlowData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorReceita" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#00d4ff" stopOpacity={0.5}/>
-                      <stop offset="95%" stopColor="#00d4ff" stopOpacity={0.05}/>
+                      <stop offset="5%" stopColor="#F31333" stopOpacity={0.5}/>
+                      <stop offset="95%" stopColor="#F31333" stopOpacity={0.05}/>
                     </linearGradient>
                     <linearGradient id="colorDespesa" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.5}/>
@@ -220,12 +220,12 @@ export default function Dashboard() {
                   />
                   <Tooltip 
                     cursor={{ stroke: 'rgba(255,255,255,0.2)' }}
-                    contentStyle={{ backgroundColor: '#0f1720', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)' }}
+                    contentStyle={{ backgroundColor: '#210606', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)' }}
                     itemStyle={{ color: '#fff', fontWeight: 600 }}
                     formatter={(value: number) => formatSec(value)}
                   />
                   <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
-                  <Area type="monotone" dataKey="receita" name="Receitas" stroke="#00d4ff" fillOpacity={1} fill="url(#colorReceita)" strokeWidth={3} />
+                  <Area type="monotone" dataKey="receita" name="Receitas" stroke="#F31333" fillOpacity={1} fill="url(#colorReceita)" strokeWidth={3} />
                   <Area type="monotone" dataKey="despesa" name="Despesas" stroke="#f43f5e" fillOpacity={1} fill="url(#colorDespesa)" strokeWidth={3} />
                 </AreaChart>
               </ResponsiveContainer>
@@ -234,7 +234,7 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Categories Chart */}
-            <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-6 shadow-xl">
+            <div className="bg-[#210606] border border-white/10 rounded-2xl p-6 shadow-xl">
               <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-white">Receita <span className="text-sm font-medium text-gray-400">(Implantação vs MRR)</span></h2>
               <div className="h-[250px]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -255,7 +255,7 @@ export default function Dashboard() {
                     </Pie>
                     <Tooltip 
                       formatter={(val: number) => formatSec(val)}
-                      contentStyle={{ backgroundColor: '#0f1720', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)', fontWeight: 600 }}
+                      contentStyle={{ backgroundColor: '#210606', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)', fontWeight: 600 }}
                     />
                     <Legend verticalAlign="bottom" height={36} iconType="circle" />
                   </PieChart>
@@ -263,7 +263,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-6 shadow-xl">
+            <div className="bg-[#210606] border border-white/10 rounded-2xl p-6 shadow-xl">
                 <h2 className="text-lg font-bold mb-6 text-white">Composição de Serviços (Qtd)</h2>
                 <div className="h-[250px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
@@ -272,9 +272,9 @@ export default function Dashboard() {
                        <XAxis dataKey="name" stroke="#cbd5e1" fontSize={12} tickLine={false} axisLine={false} />
                        <YAxis stroke="#cbd5e1" fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
                        <Tooltip 
-                         contentStyle={{ backgroundColor: '#0f1720', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)', fontWeight: 600 }}
+                         contentStyle={{ backgroundColor: '#210606', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)', fontWeight: 600 }}
                        />
-                       <Line type="monotone" dataKey="value" name="Vendas" stroke="#00d4ff" strokeWidth={4} dot={{ fill: '#00d4ff', strokeWidth: 2, r: 5 }} activeDot={{ r: 7 }} />
+                       <Line type="monotone" dataKey="value" name="Vendas" stroke="#F31333" strokeWidth={4} dot={{ fill: '#F31333', strokeWidth: 2, r: 5 }} activeDot={{ r: 7 }} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -292,8 +292,8 @@ export default function Dashboard() {
 
 function MetricCard({ title, value, icon, gradient, textColor }: { title: string, value: string | number, icon: React.ReactNode, gradient: string, textColor: string }) {
   const getBorderColor = () => {
-    if (textColor.includes("nexora-neon")) return '#00d4ff';
-    if (textColor.includes("blue")) return '#3b82f6';
+    if (textColor.includes("tecnova-neon")) return '#F31333';
+    if (textColor.includes("blue")) return '#E60000';
     if (textColor.includes("rose")) return '#f43f5e';
     if (textColor.includes("green")) return '#22c55e';
     if (textColor.includes("orange")) return '#f97316';
@@ -302,7 +302,7 @@ function MetricCard({ title, value, icon, gradient, textColor }: { title: string
   };
 
   return (
-    <div className={`bg-[#0f1720] border-l-4 rounded-xl p-5 shadow-lg relative overflow-hidden group transition-all duration-300 hover:-translate-y-1`}
+    <div className={`bg-[#210606] border-l-4 rounded-xl p-5 shadow-lg relative overflow-hidden group transition-all duration-300 hover:-translate-y-1`}
          style={{ borderLeftColor: getBorderColor() }}>
       <div className={`absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-br ${gradient} opacity-20 pointer-events-none`}></div>
       <div className="relative z-10">
