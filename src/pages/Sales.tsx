@@ -30,7 +30,7 @@ export default function Sales() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-3xl font-bold tracking-tight text-white">Registro de Vendas</h1>
-            <span className="bg-nexora-neon/10 text-nexora-neon text-sm px-3 py-1 rounded-full font-medium">
+            <span className="bg-tecnova-neon/10 text-tecnova-neon text-sm px-3 py-1 rounded-full font-medium">
               {sales.length} {sales.length === 1 ? 'venda' : 'vendas'}
             </span>
           </div>
@@ -46,12 +46,12 @@ export default function Sales() {
               placeholder="Buscar cliente..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#0f1720] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+              className="w-full pl-9 pr-4 py-2 bg-[#210606] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
             />
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 text-white w-10 h-10 rounded-lg font-medium transition-all shadow-lg shadow-nexora-neon/20"
+            className="flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-tecnova-primary to-tecnova-neon hover:opacity-90 text-white w-10 h-10 rounded-lg font-medium transition-all shadow-lg shadow-tecnova-neon/20"
             title="Nova Venda"
           >
             <Plus size={20} />
@@ -59,7 +59,7 @@ export default function Sales() {
         </div>
       </div>
 
-      <div className="bg-[#0f1720] border border-white/10 rounded-2xl shadow-lg overflow-hidden">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl shadow-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse whitespace-nowrap min-w-[800px]">
             <thead>
@@ -84,10 +84,10 @@ export default function Sales() {
                     <td className="p-4">
                       <div className="font-bold text-white">{sale.companyName}</div>
                       <div className="text-gray-400 text-xs mt-0.5">{sale.ownerName} • {sale.businessType}</div>
-                      <div className="text-nexora-neon/80 text-xs mt-0.5">{sale.whatsapp}</div>
+                      <div className="text-tecnova-neon/80 text-xs mt-0.5">{sale.whatsapp}</div>
                     </td>
                     <td className="p-4">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-500/30 text-blue-400 border border-blue-500/20">
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-red-500/30 text-red-400 border border-red-500/20">
                         {sale.category}
                       </span>
                     </td>
@@ -105,7 +105,7 @@ export default function Sales() {
                           href={sale.siteUrl.startsWith('http') ? sale.siteUrl : `https://${sale.siteUrl}`} 
                           target="_blank" 
                           rel="noreferrer"
-                          className="text-gray-400 hover:text-nexora-neon inline-flex items-center gap-1.5 transition-colors"
+                          className="text-gray-400 hover:text-tecnova-neon inline-flex items-center gap-1.5 transition-colors"
                         >
                           <span className="truncate max-w-[120px] inline-block">{sale.siteUrl}</span>
                           <ExternalLink size={14} />
@@ -174,7 +174,7 @@ function LeadSelect({ onSelectLead }: { onSelectLead: (lead: Lead | null) => voi
       <label className="text-xs font-medium text-gray-400 block mb-1.5">Vincular Lead Existente (Opcional)</label>
       <div 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer hover:border-white/20 transition-colors"
+        className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer hover:border-white/20 transition-colors"
       >
         <span className={selectedLead ? "text-white" : "text-gray-500"}>
           {selectedLead ? `${selectedLead.name} ${selectedLead.companyName ? `(${selectedLead.companyName})` : ''}` : "Selecionar Lead (Somente 'Fechado')"}
@@ -183,14 +183,14 @@ function LeadSelect({ onSelectLead }: { onSelectLead: (lead: Lead | null) => voi
       </div>
 
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-[#1a2332] border border-white/10 rounded-lg shadow-xl overflow-hidden">
-          <div className="p-2 border-b border-white/5 bg-[#0f1721]">
+        <div className="absolute z-10 w-full mt-1 bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg shadow-xl overflow-hidden">
+          <div className="p-2 border-b border-white/5 bg-[#210606]">
             <input 
               type="text" 
               placeholder="Buscar por nome ou empresa..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-md px-3 py-1.5 text-xs text-white focus:outline-none focus:border-nexora-neon"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-md px-3 py-1.5 text-xs text-white focus:outline-none focus:border-tecnova-neon"
             />
           </div>
           <div className="max-h-48 overflow-y-auto w-full">
@@ -211,7 +211,7 @@ function LeadSelect({ onSelectLead }: { onSelectLead: (lead: Lead | null) => voi
                   onClick={() => handleSelect(lead)}
                   className="px-3 py-2 text-sm text-white hover:bg-white/5 cursor-pointer flex flex-col group"
                 >
-                  <span className="font-medium group-hover:text-nexora-neon transition-colors">{lead.name}</span>
+                  <span className="font-medium group-hover:text-tecnova-neon transition-colors">{lead.name}</span>
                   {(lead.companyName || lead.whatsapp) && (
                     <span className="text-xs text-gray-500">
                       {lead.companyName && `${lead.companyName} • `}{lead.whatsapp}
@@ -229,7 +229,7 @@ function LeadSelect({ onSelectLead }: { onSelectLead: (lead: Lead | null) => voi
 
 function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: Omit<Sale, 'id' | 'date'>, commissions: Omit<Commission, 'id' | 'date' | 'status' | 'saleId'>[]) => void }) {
   const { members } = useAppContext();
-  const currentUserId = localStorage.getItem('nexora_userId');
+  const currentUserId = localStorage.getItem('tecnova_userId');
   const [selectedLeadId, setSelectedLeadId] = useState<string | undefined>();
   const [category, setCategory] = useState<ServiceCategory>('Sistema Digital Completo');
   const [companyName, setCompanyName] = useState('');
@@ -357,7 +357,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden my-auto">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden my-auto">
         <div className="p-6 border-b border-white/5 flex flex-col pt-8">
           <h2 className="text-xl font-bold text-white">Registrar Nova Venda</h2>
           <p className="text-sm text-gray-400 mt-1">Preencha os dados do projeto fechado.</p>
@@ -378,7 +378,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                 <select 
                   value={category}
                   onChange={(e) => setCategory(e.target.value as ServiceCategory)}
-                  className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors appearance-none"
+                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors appearance-none"
                 >
                   {CATEGORIES.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
@@ -393,7 +393,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   required 
                   value={price} 
                   onChange={handlePriceChange}
-                  className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   placeholder="Ex: 3.500,00"
                 />
               </div>
@@ -404,7 +404,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   type="text" 
                   value={mrr} 
                   onChange={handleMrrChange}
-                  className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   placeholder="Ex: 150,00"
                 />
               </div>
@@ -421,7 +421,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     required 
                     value={companyName} 
                     onChange={e => setCompanyName(e.target.value)}
-                    className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -431,7 +431,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     required 
                     value={businessType} 
                     onChange={e => setBusinessType(e.target.value)}
-                    className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                     placeholder="Ex: Pizzaria"
                   />
                 </div>
@@ -444,7 +444,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   required 
                   value={ownerName} 
                   onChange={e => setOwnerName(e.target.value)}
-                  className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                 />
               </div>
 
@@ -456,7 +456,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     required 
                     value={whatsapp} 
                     onChange={e => setWhatsapp(e.target.value)}
-                    className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                     placeholder="DD NNNNN-NNNN"
                   />
                 </div>
@@ -466,7 +466,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     type="text" 
                     value={siteUrl} 
                     onChange={e => setSiteUrl(e.target.value)}
-                    className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                     placeholder="exemplo.com.br"
                   />
                 </div>
@@ -477,7 +477,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
 
           <div className="pt-6 mt-6 border-t border-white/5 space-y-4">
             <h3 className="text-sm font-semibold text-white/80 uppercase tracking-wider flex items-center gap-2">
-              <Percent size={14} className="text-nexora-neon" /> Comissionamento
+              <Percent size={14} className="text-tecnova-neon" /> Comissionamento
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white/[0.02] border border-white/5 p-4 rounded-xl">
@@ -487,7 +487,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   <select 
                     value={responsibleId}
                     onChange={(e) => setResponsibleId(e.target.value)}
-                    className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   >
                     <option value="">Nenhum (Sem comissão)</option>
                     {members.map(m => (
@@ -505,7 +505,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                         <input 
                           type="number" step="0.5" 
                           value={respPercent} onChange={e => setRespPercent(e.target.value)}
-                          className="w-full bg-[#1a2332] border border-white/10 rounded-lg pl-3 pr-8 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                          className="w-full bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg pl-3 pr-8 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                           placeholder="Ex: 10"
                         />
                         <span className="absolute right-3 top-2 text-gray-500">%</span>
@@ -515,7 +515,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                       <label className="text-xs font-medium text-gray-400">Base de Cálculo</label>
                       <select 
                         value={respBasis} onChange={e => setRespBasis(e.target.value as any)}
-                        className="w-full bg-[#1a2332] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                        className="w-full bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                       >
                         <option value="Implantação">Implant. Única</option>
                         <option value="Recorrência">Recorrência (Mensal)</option>
@@ -532,7 +532,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   <select 
                     value={indicatorId}
                     onChange={(e) => setIndicatorId(e.target.value)}
-                    className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   >
                     <option value="">Nenhum</option>
                     {members.map(m => (
@@ -550,7 +550,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                         <input 
                           type="number" step="0.5" 
                           value={indPercent} onChange={e => setIndPercent(e.target.value)}
-                          className="w-full bg-[#1a2332] border border-white/10 rounded-lg pl-3 pr-8 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                          className="w-full bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg pl-3 pr-8 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                           placeholder="Ex: 5"
                         />
                         <span className="absolute right-3 top-2 text-gray-500">%</span>
@@ -560,7 +560,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                       <label className="text-xs font-medium text-gray-400">Base de Cálculo</label>
                       <select 
                         value={indBasis} onChange={e => setIndBasis(e.target.value as any)}
-                        className="w-full bg-[#1a2332] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                        className="w-full bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                       >
                         <option value="Implantação">Implant. Única</option>
                         <option value="Recorrência">Recorrência (Mensal)</option>
@@ -583,7 +583,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
             </button>
             <button 
               type="submit" 
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 transition-opacity"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-red-600 to-tecnova-neon hover:opacity-90 transition-opacity"
             >
               Salvar Venda
             </button>
