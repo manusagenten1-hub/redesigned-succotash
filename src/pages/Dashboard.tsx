@@ -167,7 +167,7 @@ export default function Dashboard() {
                     <h3 className="text-sm font-bold text-white">Meta {goal.period} de {goal.type}</h3>
                     <span className="text-xs font-bold text-[#F31333]">{goal.type === 'Faturamento' ? formatSec(progressValue) : progressValue} <span className="text-gray-300 font-medium">/ {goal.type === 'Faturamento' ? formatSec(goal.amount) : goal.amount}</span></span>
                   </div>
-                  <div className="w-full bg-[rgba(0,0,0,0.2)] rounded-full h-2.5 overflow-hidden border border-white/10">
+                  <div className="w-full bg-[#0a0a0a] rounded-full h-2.5 overflow-hidden border border-white/10">
                     <div 
                       className="bg-[#F31333] h-full rounded-full transition-all" 
                       style={{ width: `${percentage}%` }}
@@ -180,7 +180,7 @@ export default function Dashboard() {
                 <div className="pl-6 border-l border-white/10 ml-6">
                   <Link 
                     to="/metas"
-                    className="text-xs font-bold bg-[rgba(0,0,0,0.2)] border border-white/10 hover:bg-[#1c2c3d] text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap inline-block shadow-md"
+                    className="text-xs font-bold bg-[#0a0a0a] border border-white/10 hover:bg-[#1c2c3d] text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap inline-block shadow-md"
                   >
                     Ver Meta
                   </Link>
