@@ -22,7 +22,7 @@ const RewardModal = () => {
           angle: 60,
           spread: 55,
           origin: { x: 0 },
-          colors: ['#00d4ff', '#ffffff']
+          colors: ['#F31333', '#ffffff']
         });
         confetti({
           particleCount: 5,
@@ -45,10 +45,10 @@ const RewardModal = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/80 backdrop-blur-sm">
-      <div className="bg-[#0f1721] border border-nexora-neon/30 rounded-2xl w-full max-w-lg shadow-[0_0_50px_rgba(0,212,255,0.15)] overflow-hidden animate-in fade-in zoom-in-95 duration-500">
+      <div className="bg-[#210606] border border-tecnova-neon/30 rounded-2xl w-full max-w-lg shadow-[0_0_50px_rgba(243,19,51,0.15)] overflow-hidden animate-in fade-in zoom-in-95 duration-500">
         <div className="p-10 text-center relative flex flex-col items-center">
-          <div className="w-20 h-20 bg-gradient-to-tr from-nexora-neon to-blue-500 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-nexora-neon/20 animate-bounce">
-            <Gift size={40} className="text-[#020024]" />
+          <div className="w-20 h-20 bg-gradient-to-tr from-tecnova-neon to-tecnova-primary rounded-full flex items-center justify-center mb-6 shadow-lg shadow-tecnova-neon/20 animate-bounce">
+            <Gift size={40} className="text-[#0a0a0a]" />
           </div>
           
           <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-2">
@@ -58,15 +58,15 @@ const RewardModal = () => {
             A equipe atingiu a meta de {unlockedReward.goalType.toLowerCase()}!
           </p>
 
-          <div className="w-full bg-[#151f28] border border-white/10 rounded-xl p-6 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-nexora-neon/5 to-blue-500/5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity" />
-            <p className="text-xs font-bold text-nexora-neon uppercase tracking-widest mb-2">Recompensa Desbloqueada</p>
+          <div className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-xl p-6 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-r from-tecnova-neon/5 to-red-500/5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity" />
+            <p className="text-xs font-bold text-tecnova-neon uppercase tracking-widest mb-2">Recompensa Desbloqueada</p>
             <p className="text-2xl font-bold text-white mb-1">{unlockedReward.rewardText}</p>
           </div>
 
           <button 
             onClick={dismissReward}
-            className="mt-8 px-8 py-3 bg-white text-[#070d14] font-bold font-semibold rounded-full hover:bg-gray-200 transition-all flex items-center gap-2 group"
+            className="mt-8 px-8 py-3 bg-white text-[#0a0a0a] font-bold font-semibold rounded-full hover:bg-gray-200 transition-all flex items-center gap-2 group"
           >
             Continuar Vencendo
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -101,7 +101,7 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
     <>
       <button 
         className={cn(
-          "fixed top-4 left-4 z-50 p-2 bg-[#0f1720] rounded-md border border-white/10 transition-all",
+          "fixed top-4 left-4 z-50 p-2 bg-[#210606] rounded-md border border-white/10 transition-all",
           isDesktopOpen ? "md:hidden" : "md:block"
         )}
         onClick={() => {
@@ -116,14 +116,16 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
       </button>
 
       <div className={cn(
-        "fixed md:static top-0 left-0 h-full w-64 bg-[#0a111a] border-r border-white/10 flex flex-col transition-all duration-300 z-40 shrink-0",
+        "fixed md:static top-0 left-0 h-full w-64 bg-[#0a0a0a] border-r border-white/10 flex flex-col transition-all duration-300 z-40 shrink-0",
         isOpen ? "translate-x-0" : "-translate-x-full",
         isDesktopOpen ? "md:translate-x-0 md:w-64" : "md:-translate-x-full md:w-0 md:border-transparent md:opacity-0"
       )}>
         <div className="p-6 flex items-center justify-between border-b border-white/10">
-          <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-nexora-neon to-blue-500">
-            Nexora Web
-          </div>
+          <img 
+            src="https://i.ibb.co/67gXgsw6/Chat-GPT-Image-5-de-jun-de-2026-18-38-29.png" 
+            alt="TecNova" 
+            className="w-24 drop-shadow-md"
+          />
           <button 
             className="md:block hidden text-gray-400 hover:text-white"
             onClick={() => setDesktopOpen(false)}
@@ -141,7 +143,7 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
               className={({ isActive }) => cn(
                 "flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 group text-sm font-medium",
                 isActive 
-                  ? "bg-gradient-to-r from-nexora-neon/20 to-transparent text-nexora-neon border-l-2 border-nexora-neon" 
+                  ? "bg-gradient-to-r from-tecnova-neon/20 to-transparent text-tecnova-neon border-l-2 border-tecnova-neon" 
                   : "text-gray-300 hover:text-white hover:bg-white/10 border-l-2 border-transparent"
               )}
             >
@@ -165,7 +167,7 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
         </div>
         
         <div className="px-6 pb-6 text-xs text-gray-300 text-center whitespace-nowrap overflow-hidden">
-          © 2026 Nexora Web
+          © 2026 TecNova
         </div>
       </div>
       
@@ -203,7 +205,7 @@ export const AppLayout = () => {
   const togglePlay = () => setIsPlaying(!isPlaying);
 
   return (
-    <div className="flex h-screen bg-nexora-dark overflow-hidden font-sans text-white selection:bg-nexora-neon/30">
+    <div className="flex h-screen bg-tecnova-dark overflow-hidden font-sans text-white selection:bg-tecnova-neon/30">
       <Sidebar 
         onSettingsClick={() => setIsSettingsOpen(true)} 
         isDesktopOpen={isDesktopOpen} 
@@ -228,7 +230,7 @@ export const AppLayout = () => {
           <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-6 border-b border-white/5">
               <h2 className="text-xl font-bold flex items-center gap-2">
-                <Settings size={20} className="text-[#00e0ff]" />
+                <Settings size={20} className="text-[#F31333]" />
                 Configurações
               </h2>
               <button 
@@ -251,7 +253,7 @@ export const AppLayout = () => {
                     <h4 className="text-base font-bold text-white">{currentUser.name}</h4>
                     <div className="flex flex-wrap gap-1.5 mt-1.5">
                       {currentMember?.roles.map(role => (
-                        <span key={role} className="text-[10px] font-bold uppercase tracking-wider bg-white/5 text-[#00e0ff] border border-white/10 px-2 py-0.5 rounded">
+                        <span key={role} className="text-[10px] font-bold uppercase tracking-wider bg-white/5 text-[#F31333] border border-white/10 px-2 py-0.5 rounded">
                           {role}
                         </span>
                       )) || (
@@ -274,7 +276,7 @@ export const AppLayout = () => {
                   </div>
                   
                   <div className={cn(
-                    "flex items-center justify-center w-10 h-10 rounded-full text-[#00e0ff] transition-all cursor-pointer hover:bg-[#00e0ff]/20 bg-[#00e0ff]/10",
+                    "flex items-center justify-center w-10 h-10 rounded-full text-[#F31333] transition-all cursor-pointer hover:bg-[#00e0ff]/20 bg-[#00e0ff]/10",
                     isPlaying && "animate-pulse"
                   )} 
                     onClick={togglePlay}
@@ -289,10 +291,10 @@ export const AppLayout = () => {
               <div className="pt-2">
                 <button 
                   onClick={() => {
-                    localStorage.removeItem('nexora_auth');
-                    localStorage.removeItem('nexora_userId');
-                    localStorage.removeItem('nexora_userName');
-                    localStorage.removeItem('nexora_userRole');
+                    localStorage.removeItem('tecnova_auth');
+                    localStorage.removeItem('tecnova_userId');
+                    localStorage.removeItem('tecnova_userName');
+                    localStorage.removeItem('tecnova_userRole');
                     window.location.reload();
                   }}
                   className="w-full py-3 bg-red-500/10 text-red-400 font-bold rounded-xl hover:bg-red-500/20 transition-colors flex items-center justify-center gap-2"
@@ -303,7 +305,7 @@ export const AppLayout = () => {
               </div>
             </div>
             
-            <div className="p-6 border-t border-white/5 bg-[#0a111a]">
+            <div className="p-6 border-t border-white/5 bg-[#0a0a0a]">
               <button 
                 onClick={() => setIsSettingsOpen(false)}
                 className="w-full py-2 bg-white/10 text-white font-bold rounded-lg hover:bg-white/20 transition-colors"
