@@ -209,7 +209,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
               required 
               value={name} 
               onChange={e => setName(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
               placeholder="Ex: Assinatura Vercel"
             />
           </div>
@@ -222,7 +222,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
                 required 
                 value={amount} 
                 onChange={handleAmountChange}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
                 placeholder="0,00"
               />
             </div>
@@ -231,10 +231,10 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
               <select 
                 value={category}
                 onChange={(e) => setCategory(e.target.value as ExpenseCategory)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
               >
                 {CATEGORIES.map(cat => (
-                  <option key={cat} value={cat}>{cat}</option>
+                  <option className="bg-[#210606] text-white" key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
             </div>
@@ -246,16 +246,16 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
                 <select 
                   value={type}
                   onChange={(e) => setType(e.target.value as ExpenseType)}
-                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
+                  className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
                 >
-                  <option value="Recorrente">Recorrente (Assinatura)</option>
-                  <option value="Única">Custo Único</option>
+                  <option className="bg-[#210606] text-white" value="Recorrente">Recorrente (Assinatura)</option>
+                  <option className="bg-[#210606] text-white" value="Única">Custo Único</option>
                 </select>
               </div>
               {type === 'Recorrente' && (
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-400">Status da Assinatura</label>
-                  <div className="flex items-center gap-2 mt-1 w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 h-[38px] cursor-pointer" onClick={() => setIsActive(!isActive)}>
+                  <div className="flex items-center gap-2 mt-1 w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 h-[38px] cursor-pointer" onClick={() => setIsActive(!isActive)}>
                      <div className={cn("w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors", isActive ? "border-green-400" : "border-gray-500")}>
                         {isActive && <div className="w-2 h-2 rounded-full bg-green-400" />}
                      </div>
@@ -270,7 +270,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
             <textarea 
               value={description} 
               onChange={e => setDescription(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 min-h-[80px]"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 min-h-[80px]"
               placeholder="Detalhes adicionais sobre a despesa..."
             />
           </div>
