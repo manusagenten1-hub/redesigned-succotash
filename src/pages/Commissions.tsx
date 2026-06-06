@@ -185,9 +185,9 @@ export default function Commissions() {
               onChange={(e) => setStatusFilter(e.target.value as any)}
               className="bg-[#210606] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             >
-              <option value="Todos">Todos</option>
-              <option value="Pendente">Pendentes</option>
-              <option value="Pago">Pagos</option>
+              <option className="bg-[#210606] text-white" value="Todos">Todos</option>
+              <option className="bg-[#210606] text-white" value="Pendente">Pendentes</option>
+              <option className="bg-[#210606] text-white" value="Pago">Pagos</option>
             </select>
           </div>
         </div>
