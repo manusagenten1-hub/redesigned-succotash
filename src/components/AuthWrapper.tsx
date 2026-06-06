@@ -73,7 +73,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#070b14] text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -95,7 +95,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
               
               <div className="flex flex-wrap justify-center gap-6 sm:gap-8 max-w-3xl">
                 {membersList.map((member, idx) => {
-                  const colors = ['bg-red-500', 'bg-emerald-500', 'bg-indigo-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500'];
+                  const colors = ['bg-red-500', 'bg-green-500', 'bg-gray-500', 'bg-rose-500', 'bg-rose-500', 'bg-orange-500'];
                   const color = colors[idx % colors.length];
                   
                   return (
@@ -133,7 +133,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
                 </button>
                 <div className={cn(
                   "w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-bold text-white mb-4", 
-                  ['bg-red-500', 'bg-emerald-500', 'bg-indigo-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500'][membersList.findIndex(m => m.id === selectedUser.id) % 6]
+                  ['bg-red-500', 'bg-green-500', 'bg-gray-500', 'bg-rose-500', 'bg-rose-500', 'bg-orange-500'][membersList.findIndex(m => m.id === selectedUser.id) % 6]
                 )}>
                   {selectedUser.firstName.charAt(0)}
                 </div>
