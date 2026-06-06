@@ -49,7 +49,7 @@ export default function Clients() {
               placeholder="Buscar cliente ou empresa..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#0f1720] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+              className="w-full pl-9 pr-4 py-2 bg-[#210606] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
             />
           </div>
           
@@ -70,7 +70,7 @@ export default function Clients() {
         </div>
       </div>
 
-      <div className="bg-[#0f1720] border border-white/10 rounded-2xl shadow-lg overflow-hidden flex-1">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl shadow-lg overflow-hidden flex-1">
         <div className="overflow-x-auto min-h-[300px]">
           <table className="w-full text-left border-collapse whitespace-nowrap min-w-[800px]">
             <thead>
@@ -111,7 +111,7 @@ export default function Clients() {
                       <td className="p-4">
                         <div className="text-gray-300 text-xs">Imp: <span className="text-white">{formatSec(client.price)}</span></div>
                         {client.mrr > 0 ? (
-                          <div className="text-nexora-neon font-medium text-xs flex mt-0.5 items-center gap-1">
+                          <div className="text-tecnova-neon font-medium text-xs flex mt-0.5 items-center gap-1">
                              MRR: {formatSec(client.mrr)} <span className="text-[10px] text-gray-400 font-normal">/mês</span>
                           </div>
                         ) : (
@@ -132,7 +132,7 @@ export default function Clients() {
                             href={client.siteUrl.startsWith('http') ? client.siteUrl : `https://${client.siteUrl}`} 
                             target="_blank" 
                             rel="noreferrer"
-                            className="inline-flex w-fit items-center gap-1.5 text-xs text-gray-400 hover:text-blue-400 transition-colors"
+                            className="inline-flex w-fit items-center gap-1.5 text-xs text-gray-400 hover:text-red-400 transition-colors"
                           >
                             <ExternalLink size={14} /> Site
                           </a>
