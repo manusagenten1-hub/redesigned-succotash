@@ -204,7 +204,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
                 required 
                 value={firstName} 
                 onChange={e => setFirstName(e.target.value)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                 placeholder="Ex: João"
               />
             </div>
@@ -215,7 +215,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
                 required 
                 value={lastName} 
                 onChange={e => setLastName(e.target.value)}
-                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                 placeholder="Ex: Silva"
               />
             </div>
@@ -227,7 +227,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
               required 
               value={roles} 
               onChange={e => setRoles(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
               placeholder="Ex: Marketing, Design (separe por vírgula)"
             />
           </div>
@@ -237,7 +237,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
               type="url" 
               value={photoUrl} 
               onChange={e => setPhotoUrl(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
               placeholder="https://exemplo.com/foto.jpg"
             />
           </div>
