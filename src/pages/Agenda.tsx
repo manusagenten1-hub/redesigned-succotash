@@ -63,7 +63,7 @@ export default function Agenda() {
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 text-white px-4 h-10 w-full sm:w-auto rounded-lg font-medium transition-all shadow-lg shadow-nexora-neon/20 gap-2"
+          className="flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-tecnova-primary to-tecnova-neon hover:opacity-90 text-white px-4 h-10 w-full sm:w-auto rounded-lg font-medium transition-all shadow-lg shadow-tecnova-neon/20 gap-2"
         >
           <Plus size={18} />
           <span>Novo Evento</span>
@@ -72,8 +72,8 @@ export default function Agenda() {
 
       {/* Alerts / Summary */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-[#0f1720] border border-white/10 rounded-xl p-5 flex items-center gap-4">
-          <div className="p-3 bg-amber-500/30 text-amber-400 rounded-full">
+        <div className="bg-[#210606] border border-white/10 rounded-xl p-5 flex items-center gap-4">
+          <div className="p-3 bg-orange-500/30 text-amber-400 rounded-full">
             <CalendarClock size={24} />
           </div>
           <div>
@@ -81,7 +81,7 @@ export default function Agenda() {
             <p className="text-2xl font-bold text-white leading-none mt-1">{todayFollowUps.length}</p>
           </div>
         </div>
-        <div className="bg-[#0f1720] border border-white/10 rounded-xl p-5 flex items-center gap-4">
+        <div className="bg-[#210606] border border-white/10 rounded-xl p-5 flex items-center gap-4">
            <div className="p-3 bg-rose-500/10 text-rose-400 rounded-full">
             <AlertCircle size={24} />
           </div>
@@ -90,7 +90,7 @@ export default function Agenda() {
             <p className="text-2xl font-bold text-rose-400 leading-none mt-1">{overdueEvents.length}</p>
           </div>
         </div>
-        <div className="bg-nexora-card border border-white/5 rounded-xl p-5 flex items-center gap-4">
+        <div className="bg-tecnova-card border border-white/5 rounded-xl p-5 flex items-center gap-4">
           <div className="p-3 bg-green-500/10 text-green-400 rounded-full">
             <CheckCircle2 size={24} />
           </div>
@@ -105,19 +105,19 @@ export default function Agenda() {
       <div className="flex border-b border-white/10 mt-6">
         <button 
           onClick={() => setViewMode('dia')}
-          className={cn("px-4 py-3 text-sm font-medium border-b-2 transition-colors", viewMode === 'dia' ? "border-nexora-neon text-nexora-neon" : "border-transparent text-gray-300 hover:text-white")}
+          className={cn("px-4 py-3 text-sm font-medium border-b-2 transition-colors", viewMode === 'dia' ? "border-tecnova-neon text-tecnova-neon" : "border-transparent text-gray-300 hover:text-white")}
         >
           Hoje
         </button>
         <button 
           onClick={() => setViewMode('semana')}
-          className={cn("px-4 py-3 text-sm font-medium border-b-2 transition-colors", viewMode === 'semana' ? "border-nexora-neon text-nexora-neon" : "border-transparent text-gray-400 hover:text-white")}
+          className={cn("px-4 py-3 text-sm font-medium border-b-2 transition-colors", viewMode === 'semana' ? "border-tecnova-neon text-tecnova-neon" : "border-transparent text-gray-400 hover:text-white")}
         >
           Esta Semana
         </button>
         <button 
           onClick={() => setViewMode('mes')}
-          className={cn("px-4 py-3 text-sm font-medium border-b-2 transition-colors", viewMode === 'mes' ? "border-nexora-neon text-nexora-neon" : "border-transparent text-gray-400 hover:text-white")}
+          className={cn("px-4 py-3 text-sm font-medium border-b-2 transition-colors", viewMode === 'mes' ? "border-tecnova-neon text-tecnova-neon" : "border-transparent text-gray-400 hover:text-white")}
         >
           Este Mês
         </button>
@@ -140,7 +140,7 @@ export default function Agenda() {
             <h3 className="text-sm font-semibold text-gray-300 mt-6">Próximos Hoje</h3>
           )}
           {upcomingVisible.length === 0 && overdueVisible.length === 0 ? (
-             <div className="bg-nexora-card border border-white/5 rounded-2xl p-12 text-center text-gray-400">
+             <div className="bg-tecnova-card border border-white/5 rounded-2xl p-12 text-center text-gray-400">
                Nenhum evento agendado para este período.
              </div>
           ) : (
@@ -176,19 +176,19 @@ const EventCard: React.FC<{ event: CalendarEvent }> = ({ event }) => {
   let icon = <CalendarDays size={16} />;
   
   if (event.type === 'Reunião') {
-    typeColors = "bg-blue-500/10 text-blue-400 border-blue-500/20";
+    typeColors = "bg-red-500/10 text-red-400 border-red-500/20";
     icon = <Briefcase size={16} />;
   } else if (event.type === 'Follow-up') {
-    typeColors = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+    typeColors = "bg-orange-500/10 text-amber-400 border-orange-500/20";
     icon = <CalendarClock size={16} />;
   } else if (event.type === 'Tarefa interna') {
-    typeColors = "bg-purple-500/10 text-purple-400 border-purple-500/20";
+    typeColors = "bg-rose-500/10 text-purple-400 border-rose-500/20";
     icon = <CheckCircle2 size={16} />;
   }
 
   return (
     <div className={cn(
-      "bg-nexora-card border rounded-xl p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center relative group transition-colors",
+      "bg-tecnova-card border rounded-xl p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center relative group transition-colors",
       isOverdue ? "border-rose-500/30" : "border-white/5 hover:border-white/10"
     )}>
       {/* Time column */}
@@ -304,7 +304,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden my-auto">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden my-auto">
         <div className="p-6 border-b border-white/5 flex flex-col pt-8">
           <h2 className="text-xl font-bold text-white flex items-center gap-2"><CalendarIcon size={20} /> Agendar Evento</h2>
         </div>
@@ -317,7 +317,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
               required 
               value={title} 
               onChange={e => setTitle(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
               placeholder="Ex: Reunião de Apresentação"
             />
           </div>
@@ -328,7 +328,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
                <select 
                  value={type}
                  onChange={(e) => setType(e.target.value as CalendarEventType)}
-                 className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+                 className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
                >
                  <option value="Follow-up">Follow-up</option>
                  <option value="Reunião">Reunião</option>
@@ -342,7 +342,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
                  required
                  value={date}
                  onChange={(e) => setDate(e.target.value)}
-                 className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                 className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                />
             </div>
           </div>
@@ -380,7 +380,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
                <select 
                  value={clientId}
                  onChange={(e) => setClientId(e.target.value)}
-                 className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+                 className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
                >
                  <option value="">Nenhum cliente...</option>
                  {clients.map(c => <option key={c.id} value={c.id}>{c.companyName}</option>)}
@@ -393,7 +393,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
              <select 
                value={memberId}
                onChange={(e) => setMemberId(e.target.value)}
-               className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+               className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
              >
                <option value="">Você (Sem atribuição específica)</option>
                {members.map(m => <option key={m.id} value={m.id}>{m.firstName} {m.lastName}</option>)}
@@ -405,7 +405,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
             <textarea 
               value={description} 
               onChange={e => setDescription(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon min-h-[60px]"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon min-h-[60px]"
               placeholder="Assunto da reunião, link da call, anotações..."
             />
           </div>
@@ -420,7 +420,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
             </button>
             <button 
               type="submit" 
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 transition-opacity"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-red-600 to-tecnova-neon hover:opacity-90 transition-opacity"
             >
               Agendar
             </button>
@@ -449,7 +449,7 @@ function SearchableLeadSelect({ leads, value, onChange }: { leads: Lead[], value
     <div className="relative">
       <div 
          onClick={() => setIsOpen(!isOpen)}
-         className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer min-h-[38px]"
+         className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer min-h-[38px]"
       >
         <span className="truncate pr-2">
           {selectedLead ? (selectedLead.companyName || selectedLead.name) : 'Nenhum lead...'}
@@ -458,7 +458,7 @@ function SearchableLeadSelect({ leads, value, onChange }: { leads: Lead[], value
       </div>
       
       {isOpen && (
-        <div className="absolute z-10 top-full mt-1 left-0 w-full bg-[#151f28] border border-white/10 rounded-lg shadow-xl overflow-hidden max-h-48 flex flex-col">
+        <div className="absolute z-10 top-full mt-1 left-0 w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg shadow-xl overflow-hidden max-h-48 flex flex-col">
           <input 
             type="text"
             placeholder="Buscar empresa ou lead..."
