@@ -166,13 +166,13 @@ export default function AdminDashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <ShieldCheck className="text-nexora-neon" />
+            <ShieldCheck className="text-tecnova-neon" />
             Gestão da Equipe
           </h1>
           <p className="text-gray-300">Painel administrativo do CEO. Monitore o desempenho e produtividade.</p>
         </div>
         
-        <div className="flex flex-wrap gap-2 bg-[#0f1720] p-1 rounded-lg border border-white/10 items-center">
+        <div className="flex flex-wrap gap-2 bg-[#210606] p-1 rounded-lg border border-white/10 items-center">
           <FilterButton active={timeFilter === 'hoje'} onClick={() => setTimeFilter('hoje')}>Hoje</FilterButton>
           <FilterButton active={timeFilter === '7d'} onClick={() => setTimeFilter('7d')}>7 Dias</FilterButton>
           <FilterButton active={timeFilter === '30d'} onClick={() => setTimeFilter('30d')}>30 Dias</FilterButton>
@@ -182,14 +182,14 @@ export default function AdminDashboard() {
       </div>
 
       {timeFilter === 'personalizado' && (
-        <div className="flex items-center gap-4 bg-[#0f1720] p-4 rounded-xl border border-white/10 animate-in fade-in">
+        <div className="flex items-center gap-4 bg-[#210606] p-4 rounded-xl border border-white/10 animate-in fade-in">
           <div className="flex flex-col">
             <label className="text-xs text-gray-300 mb-1">Data Inicial</label>
             <input 
               type="date" 
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-[#0f1722] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="bg-[#0f1722] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             />
           </div>
           <div className="flex flex-col">
@@ -198,7 +198,7 @@ export default function AdminDashboard() {
               type="date" 
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="bg-[#0f1722] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="bg-[#0f1722] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             />
           </div>
         </div>
@@ -207,7 +207,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* RANKING SECTION */}
-        <div className="lg:col-span-1 border border-white/10 bg-nexora-card rounded-xl overflow-hidden flex flex-col">
+        <div className="lg:col-span-1 border border-white/10 bg-tecnova-card rounded-xl overflow-hidden flex flex-col">
           <div className="p-4 border-b border-white/10 bg-white/10 flex items-center justify-between">
             <h2 className="font-bold text-white flex items-center gap-2">
               <Trophy className="text-yellow-500" size={18} />
@@ -233,7 +233,7 @@ export default function AdminDashboard() {
                     <p className="text-xs text-gray-400">{member.vendas} venda(s)</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-nexora-neon font-bold">R$ {member.totalVendido.toLocaleString()}</p>
+                    <p className="text-tecnova-neon font-bold">R$ {member.totalVendido.toLocaleString()}</p>
                   </div>
                 </div>
               ))
@@ -242,10 +242,10 @@ export default function AdminDashboard() {
         </div>
 
         {/* RECENT ACTIVITY SECTION */}
-        <div className="lg:col-span-2 border border-white/10 bg-nexora-card rounded-xl overflow-hidden flex flex-col">
+        <div className="lg:col-span-2 border border-white/10 bg-tecnova-card rounded-xl overflow-hidden flex flex-col">
           <div className="p-4 border-b border-white/5 bg-white/5 flex items-center justify-between">
             <h2 className="font-semibold text-white flex items-center gap-2">
-              <Activity className="text-blue-400" size={18} />
+              <Activity className="text-red-400" size={18} />
               Últimas Ações (Membros)
             </h2>
           </div>
@@ -258,7 +258,7 @@ export default function AdminDashboard() {
                   <div className="p-2 rounded-lg bg-white/5 mt-0.5">
                     {activity.type === 'ADD_LEAD' && <Target size={16} className="text-purple-400" />}
                     {activity.type === 'ADD_SALE' && <TrendingUp size={16} className="text-green-400" />}
-                    {activity.type === 'ADD_EVENT' && <CalendarIcon size={16} className="text-blue-400" />}
+                    {activity.type === 'ADD_EVENT' && <CalendarIcon size={16} className="text-red-400" />}
                     {activity.type === 'OTHER' && <Clock size={16} className="text-gray-400" />}
                   </div>
                   <div>
@@ -284,10 +284,10 @@ export default function AdminDashboard() {
               key={member.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-nexora-card border border-white/10 rounded-xl p-5"
+              className="bg-tecnova-card border border-white/10 rounded-xl p-5"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-nexora-neon flex items-center justify-center font-bold text-white shadow-lg">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-tecnova-primary to-tecnova-neon flex items-center justify-center font-bold text-white shadow-lg">
                   {member.name.charAt(0)}
                 </div>
                 <div>
@@ -307,7 +307,7 @@ export default function AdminDashboard() {
                   <span className="font-medium text-white">{member.leads}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-400 flex items-center gap-1.5"><CalendarIcon size={14} className="text-blue-400"/> Reuniões Marcadas</span>
+                  <span className="text-gray-400 flex items-center gap-1.5"><CalendarIcon size={14} className="text-red-400"/> Reuniões Marcadas</span>
                   <span className="font-medium text-white">{member.reunioes}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm border-t border-white/10 pt-3">
@@ -316,7 +316,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="flex justify-between items-center text-sm bg-white/5 p-2 rounded-lg border border-white/5">
                   <span className="text-gray-400">Receita Gerada</span>
-                  <span className="font-bold text-nexora-neon">R$ {member.totalVendido.toLocaleString()}</span>
+                  <span className="font-bold text-tecnova-neon">R$ {member.totalVendido.toLocaleString()}</span>
                 </div>
                 
                 {member.leads > 0 && (
@@ -341,7 +341,7 @@ function FilterButton({ children, active, onClick }: { children: React.ReactNode
       className={cn(
         "px-4 py-1.5 text-sm font-medium rounded-md transition-colors whitespace-nowrap",
         active 
-          ? "bg-nexora-neon text-[#020024] shadow-md" 
+          ? "bg-tecnova-neon text-[#0a0a0a] shadow-md" 
           : "text-gray-300 hover:text-white hover:bg-white/5"
       )}
     >
