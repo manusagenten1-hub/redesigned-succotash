@@ -317,7 +317,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
               required 
               value={title} 
               onChange={e => setTitle(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
               placeholder="Ex: Reunião de Apresentação"
             />
           </div>
@@ -328,11 +328,11 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
                <select 
                  value={type}
                  onChange={(e) => setType(e.target.value as CalendarEventType)}
-                 className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+                 className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
                >
-                 <option value="Follow-up">Follow-up</option>
-                 <option value="Reunião">Reunião</option>
-                 <option value="Tarefa interna">Tarefa Interna</option>
+                 <option className="bg-[#210606] text-white" value="Follow-up">Follow-up</option>
+                 <option className="bg-[#210606] text-white" value="Reunião">Reunião</option>
+                 <option className="bg-[#210606] text-white" value="Tarefa interna">Tarefa Interna</option>
                </select>
             </div>
             <div className="space-y-1.5">
@@ -342,7 +342,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
                  required
                  value={date}
                  onChange={(e) => setDate(e.target.value)}
-                 className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                 className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                />
             </div>
           </div>
@@ -380,10 +380,10 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
                <select 
                  value={clientId}
                  onChange={(e) => setClientId(e.target.value)}
-                 className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+                 className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
                >
-                 <option value="">Nenhum cliente...</option>
-                 {clients.map(c => <option key={c.id} value={c.id}>{c.companyName}</option>)}
+                 <option className="bg-[#210606] text-white" value="">Nenhum cliente...</option>
+                 {clients.map(c => <option className="bg-[#210606] text-white" key={c.id} value={c.id}>{c.companyName}</option>)}
                </select>
              </div>
           </div>
@@ -393,10 +393,10 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
              <select 
                value={memberId}
                onChange={(e) => setMemberId(e.target.value)}
-               className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+               className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
              >
-               <option value="">Você (Sem atribuição específica)</option>
-               {members.map(m => <option key={m.id} value={m.id}>{m.firstName} {m.lastName}</option>)}
+               <option className="bg-[#210606] text-white" value="">Você (Sem atribuição específica)</option>
+               {members.map(m => <option className="bg-[#210606] text-white" key={m.id} value={m.id}>{m.firstName} {m.lastName}</option>)}
              </select>
           </div>
 
@@ -405,7 +405,7 @@ function AddEventModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: 
             <textarea 
               value={description} 
               onChange={e => setDescription(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon min-h-[60px]"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon min-h-[60px]"
               placeholder="Assunto da reunião, link da call, anotações..."
             />
           </div>
@@ -449,7 +449,7 @@ function SearchableLeadSelect({ leads, value, onChange }: { leads: Lead[], value
     <div className="relative">
       <div 
          onClick={() => setIsOpen(!isOpen)}
-         className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer min-h-[38px]"
+         className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer min-h-[38px]"
       >
         <span className="truncate pr-2">
           {selectedLead ? (selectedLead.companyName || selectedLead.name) : 'Nenhum lead...'}
@@ -458,7 +458,7 @@ function SearchableLeadSelect({ leads, value, onChange }: { leads: Lead[], value
       </div>
       
       {isOpen && (
-        <div className="absolute z-10 top-full mt-1 left-0 w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg shadow-xl overflow-hidden max-h-48 flex flex-col">
+        <div className="absolute z-10 top-full mt-1 left-0 w-full bg-[#0a0a0a] border border-white/10 rounded-lg shadow-xl overflow-hidden max-h-48 flex flex-col">
           <input 
             type="text"
             placeholder="Buscar empresa ou lead..."
