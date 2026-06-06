@@ -23,8 +23,8 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
     if (!isLoaded) return;
     
     // Check if already authenticated in this session
-    const authStatus = localStorage.getItem('nexora_auth');
-    const currentUserId = localStorage.getItem('nexora_userId');
+    const authStatus = localStorage.getItem('tecnova_auth');
+    const currentUserId = localStorage.getItem('tecnova_userId');
     const userExists = membersList.some(m => m.id === currentUserId);
 
     if (authStatus === 'true' && userExists) {
@@ -32,10 +32,10 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
       setShowSplash(false); // Skip splash if already logged in
     } else {
       if (authStatus === 'true') {
-        localStorage.removeItem('nexora_auth');
-        localStorage.removeItem('nexora_userId');
-        localStorage.removeItem('nexora_userName');
-        localStorage.removeItem('nexora_userRole');
+        localStorage.removeItem('tecnova_auth');
+        localStorage.removeItem('tecnova_userId');
+        localStorage.removeItem('tecnova_userName');
+        localStorage.removeItem('tecnova_userRole');
       }
       setTimeout(() => setShowSplash(false), 2000); // 2s splash max
     }
@@ -45,27 +45,27 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
     e.preventDefault();
     if (selectedUser && verifyPassword(selectedUser.id, password)) {
       setIsAuthenticated(true);
-      localStorage.setItem('nexora_auth', 'true');
-      localStorage.setItem('nexora_userId', selectedUser.id);
-      localStorage.setItem('nexora_userName', `${selectedUser.firstName} ${selectedUser.lastName}`);
-      localStorage.setItem('nexora_userRole', selectedUser.roles[0] || 'Membro');
+      localStorage.setItem('tecnova_auth', 'true');
+      localStorage.setItem('tecnova_userId', selectedUser.id);
+      localStorage.setItem('tecnova_userName', `${selectedUser.firstName} ${selectedUser.lastName}`);
+      localStorage.setItem('tecnova_userRole', selectedUser.roles[0] || 'Membro');
     } else {
       setError('Senha incorreta. Tente novamente.');
     }
   };
 
-  const currentUserName = localStorage.getItem('nexora_currentUser');
+  const currentUserName = localStorage.getItem('tecnova_currentUser');
 
   if (showSplash) {
     return (
-      <div className="fixed inset-0 bg-[#070b14] flex flex-col items-center justify-center z-[100]">
+      <div className="fixed inset-0 bg-[#0a0a0a] flex flex-col items-center justify-center z-[100]">
         <motion.img 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          src="https://i.ibb.co/DDNwgKMg/w6tcns9185rmy0cxm4tr0k6zgc-preview-0-ezremove.png" 
-          alt="Nexora Web" 
-          className="w-48 md:w-64 drop-shadow-[0_0_30px_rgba(37,99,235,0.3)] object-contain"
+          src="https://i.ibb.co/67gXgsw6/Chat-GPT-Image-5-de-jun-de-2026-18-38-29.png" 
+          alt="TecNova" 
+          className="w-48 md:w-64 drop-shadow-[0_0_30px_rgba(243,19,51,0.3)] object-contain"
         />
       </div>
     );
@@ -75,7 +75,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
     return (
       <div className="min-h-screen bg-[#070b14] text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
         {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
         <AnimatePresence mode="wait">
           {!selectedUser ? (
@@ -87,15 +87,15 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
               className="flex flex-col items-center"
             >
               <img 
-                src="https://i.ibb.co/DDNwgKMg/w6tcns9185rmy0cxm4tr0k6zgc-preview-0-ezremove.png" 
-                alt="Nexora Web" 
-                className="w-32 mb-12 drop-shadow-[0_0_20px_rgba(37,99,235,0.2)]"
+                src="https://i.ibb.co/67gXgsw6/Chat-GPT-Image-5-de-jun-de-2026-18-38-29.png" 
+                alt="TecNova" 
+                className="w-32 mb-12 drop-shadow-[0_0_20px_rgba(243,19,51,0.2)]"
               />
               <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center tracking-tight">Quem está acessando?</h1>
               
               <div className="flex flex-wrap justify-center gap-6 sm:gap-8 max-w-3xl">
                 {membersList.map((member, idx) => {
-                  const colors = ['bg-blue-500', 'bg-emerald-500', 'bg-indigo-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500'];
+                  const colors = ['bg-red-500', 'bg-emerald-500', 'bg-indigo-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500'];
                   const color = colors[idx % colors.length];
                   
                   return (
@@ -133,7 +133,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
                 </button>
                 <div className={cn(
                   "w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-bold text-white mb-4", 
-                  ['bg-blue-500', 'bg-emerald-500', 'bg-indigo-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500'][membersList.findIndex(m => m.id === selectedUser.id) % 6]
+                  ['bg-red-500', 'bg-emerald-500', 'bg-indigo-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500'][membersList.findIndex(m => m.id === selectedUser.id) % 6]
                 )}>
                   {selectedUser.firstName.charAt(0)}
                 </div>
@@ -151,8 +151,8 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
                     value={password}
                     onChange={(e) => { setPassword(e.target.value); setError(''); }}
                     className={cn(
-                      "w-full bg-[#151f28] border rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none transition-colors",
-                      error ? "border-red-500/50 focus:border-red-500" : "border-white/10 focus:border-nexora-neon"
+                      "w-full bg-[rgba(0,0,0,0.2)] border rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none transition-colors",
+                      error ? "border-red-500/50 focus:border-red-500" : "border-white/10 focus:border-tecnova-neon"
                     )}
                     placeholder="Token de segurança"
                     autoFocus
@@ -166,7 +166,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
                 <button
                   type="submit"
                   disabled={!password}
-                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white py-3 rounded-xl font-medium transition-all shadow-lg shadow-nexora-neon/20"
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-tecnova-primary to-tecnova-neon hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white py-3 rounded-xl font-medium transition-all shadow-lg shadow-tecnova-neon/20"
                 >
                   Continuar <ArrowRight size={18} />
                 </button>
