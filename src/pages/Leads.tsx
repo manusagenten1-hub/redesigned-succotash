@@ -16,11 +16,11 @@ const PREDEFINED_SOURCES = ['Tráfego pago', 'Instagram', 'Tik Tok', 'Prospecç�
 
 // Color mapping for statuses
 const STATUS_COLORS: Record<LeadStatus, { bg: string, text: string, border: string }> = {
-  'Novo Lead': { bg: 'bg-blue-500/30', text: 'text-blue-400', border: 'border-blue-500/20' },
-  'Contato Iniciado': { bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'border-purple-500/20' },
+  'Novo Lead': { bg: 'bg-red-500/30', text: 'text-red-400', border: 'border-red-500/20' },
+  'Contato Iniciado': { bg: 'bg-rose-500/10', text: 'text-purple-400', border: 'border-rose-500/20' },
   'Reunião Marcada': { bg: 'bg-orange-500/10', text: 'text-orange-400', border: 'border-orange-500/20' },
   'Proposta Enviada': { bg: 'bg-cyan-500/10', text: 'text-cyan-400', border: 'border-cyan-500/20' },
-  'Negociação': { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20' },
+  'Negociação': { bg: 'bg-orange-500/10', text: 'text-amber-400', border: 'border-orange-500/20' },
   'Fechado': { bg: 'bg-green-500/10', text: 'text-green-400', border: 'border-green-500/20' },
   'Perdido': { bg: 'bg-red-500/10', text: 'text-red-400', border: 'border-red-500/20' }
 };
@@ -160,7 +160,7 @@ export default function Leads() {
               placeholder="Buscar lead..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#0f1720] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+              className="w-full pl-9 pr-4 py-2 bg-[#210606] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
             />
           </div>
 
@@ -172,7 +172,7 @@ export default function Leads() {
           </button>
           <button
             onClick={openAddModal}
-            className="flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 text-white px-4 h-10 rounded-lg font-medium transition-all shadow-lg shadow-nexora-neon/20 gap-2"
+            className="flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-tecnova-primary to-tecnova-neon hover:opacity-90 text-white px-4 h-10 rounded-lg font-medium transition-all shadow-lg shadow-tecnova-neon/20 gap-2"
           >
             <Plus size={18} />
             <span>Novo Lead</span>
@@ -181,7 +181,7 @@ export default function Leads() {
       </div>
 
       {/* Filters Bar */}
-      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center bg-[#0f1720] p-3 rounded-xl border border-white/10">
+      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center bg-[#210606] p-3 rounded-xl border border-white/10">
         <div className="flex items-center gap-2 text-sm text-gray-400 font-medium px-2">
           <Filter size={16} /> Filtros:
         </div>
@@ -189,7 +189,7 @@ export default function Leads() {
         <select 
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as any)}
-          className="bg-[#0f1721] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-gray-300 focus:outline-none focus:border-nexora-neon appearance-none min-w-[150px]"
+          className="bg-[#210606] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-gray-300 focus:outline-none focus:border-tecnova-neon appearance-none min-w-[150px]"
         >
           <option value="Todos">Todos os Status</option>
           {LEAD_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
@@ -206,7 +206,7 @@ export default function Leads() {
           </button>
           <button 
             onClick={() => setQuickFilter('Sem Resposta')}
-            className={cn("px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border flex items-center gap-1.5", quickFilter === 'Sem Resposta' ? "bg-purple-500/20 text-purple-300 border-purple-500/30" : "bg-transparent text-gray-400 border-white/5 hover:bg-white/5")}
+            className={cn("px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border flex items-center gap-1.5", quickFilter === 'Sem Resposta' ? "bg-rose-500/20 text-purple-300 border-rose-500/30" : "bg-transparent text-gray-400 border-white/5 hover:bg-white/5")}
           >
             <MessageCircle size={14} /> Sem Resposta
           </button>
@@ -226,7 +226,7 @@ export default function Leads() {
       </div>
 
       {/* List View */}
-      <div className="bg-nexora-card border border-white/5 rounded-2xl shadow-lg flex-1 overflow-hidden flex flex-col">
+      <div className="bg-tecnova-card border border-white/5 rounded-2xl shadow-lg flex-1 overflow-hidden flex flex-col">
         <div className="overflow-x-auto flex-1">
           <table className="w-full text-left border-collapse whitespace-nowrap min-w-[1150px]">
             <thead>
@@ -246,7 +246,7 @@ export default function Leads() {
                     <div className="flex flex-col items-center justify-center">
                       <SearchX size={48} className="text-gray-400 mb-3" />
                       <p className="text-base font-medium text-gray-400">Nenhum lead encontrado com estes filtros.</p>
-                      <button onClick={() => { setStatusFilter('Todos'); setQuickFilter('Todos'); setSearchTerm(''); }} className="mt-3 text-nexora-neon hover:underline text-sm">
+                      <button onClick={() => { setStatusFilter('Todos'); setQuickFilter('Todos'); setSearchTerm(''); }} className="mt-3 text-tecnova-neon hover:underline text-sm">
                         Limpar Filtros
                       </button>
                     </div>
@@ -300,7 +300,7 @@ export default function Leads() {
                             </span>
                           </div>
                           {lead.nextAction ? (
-                            <div className="flex items-center gap-1.5 text-nexora-neon">
+                            <div className="flex items-center gap-1.5 text-tecnova-neon">
                               <CalendarDays size={13} className="opacity-80" />
                               <span className="truncate max-w-[150px]">{lead.nextAction.title}</span>
                             </div>
@@ -338,7 +338,7 @@ export default function Leads() {
                             </button>
                             <button 
                               onClick={() => handleAction(lead, 'negotiate')}
-                              className="p-1.5 text-gray-400 hover:text-amber-400 hover:bg-amber-500/10 rounded-md transition-colors"
+                              className="p-1.5 text-gray-400 hover:text-amber-400 hover:bg-orange-500/10 rounded-md transition-colors"
                               title="Em Negociação"
                             >
                               <Briefcase size={16} />
@@ -431,7 +431,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
         <div className="p-6 border-b border-white/5 flex flex-col pt-8">
           <h2 className="text-xl font-bold text-white">{isEditing ? 'Editar Lead' : 'Adicionar Novo Lead'}</h2>
           <p className="text-sm text-gray-400 mt-1">Preencha os dados do potencial cliente.</p>
@@ -444,7 +444,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
                 type="text" 
                 value={name} 
                 onChange={e => setName(e.target.value)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                 placeholder="Ex: Carlos Oliveira"
               />
             </div>
@@ -454,7 +454,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
                 type="text" 
                 value={companyName} 
                 onChange={e => setCompanyName(e.target.value)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                 placeholder="Ex: Carlos LTDA"
               />
             </div>
@@ -467,7 +467,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
               required 
               value={whatsapp} 
               onChange={e => setWhatsapp(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
               placeholder="(11) 99999-9999"
             />
           </div>
@@ -478,7 +478,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
               <select 
                 value={source}
                 onChange={e => setSource(e.target.value)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {PREDEFINED_SOURCES.map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -490,7 +490,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
               <select 
                 value={status}
                 onChange={e => setStatus(e.target.value as LeadStatus)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {LEAD_STATUSES.map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -504,7 +504,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
             <textarea 
               value={notes} 
               onChange={e => setNotes(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon min-h-[80px]"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon min-h-[80px]"
               placeholder="Detalhes ou histórico do lead..."
             />
           </div>
@@ -519,7 +519,7 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
             </button>
             <button 
               type="submit" 
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 transition-opacity"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-red-600 to-tecnova-neon hover:opacity-90 transition-opacity"
             >
               Salvar Lead
             </button>
@@ -594,7 +594,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
         <div className="p-6 border-b border-white/5 flex flex-col pt-8">
           <h2 className="text-xl font-bold text-white">Importação em Massa</h2>
           <p className="text-sm text-gray-400 mt-1">Cole seus leads abaixo para automatizar o cadastro.</p>
@@ -606,7 +606,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
             <textarea 
               value={rawText} 
               onChange={e => setRawText(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-3 text-sm text-white focus:outline-none focus:border-nexora-neon h-48 font-mono text-xs whitespace-pre"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-3 text-sm text-white focus:outline-none focus:border-tecnova-neon h-48 font-mono text-xs whitespace-pre"
               placeholder={'Di Caputti Pizza Bar\n+55 92 98212-1514\nPorp\'s Pizza\n+55 91 98554-8400'}
             />
           </div>
@@ -617,7 +617,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
               <select 
                 value={source}
                 onChange={e => setSource(e.target.value)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {PREDEFINED_SOURCES.map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -629,7 +629,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
               <select 
                 value={status}
                 onChange={e => setStatus(e.target.value as LeadStatus)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon appearance-none"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {LEAD_STATUSES.map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -650,7 +650,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
             <button 
               onClick={handleProcess}
               disabled={!rawText.trim() || isProcessing}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-red-600 to-tecnova-neon hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
             >
               {isProcessing ? 'Importando...' : 'Processar e Importar'}
             </button>
