@@ -30,7 +30,7 @@ export default function Members() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-white">Nossa Equipe</h1>
-          <p className="text-gray-300 mt-1">Gestão de membros e permissões da Nexora Web.</p>
+          <p className="text-gray-300 mt-1">Gestão de membros e permissões da TecNova.</p>
         </div>
         <div className="flex items-center gap-3">
           <a
@@ -44,7 +44,7 @@ export default function Members() {
           </a>
           <button
             onClick={handleOpenAdd}
-            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-lg shadow-nexora-neon/20"
+            className="flex items-center gap-2 bg-gradient-to-r from-tecnova-primary to-tecnova-neon hover:opacity-90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-lg shadow-tecnova-neon/20"
           >
             <Plus size={18} />
             Adicionar Membro
@@ -53,22 +53,22 @@ export default function Members() {
       </div>
 
       {newToken && (
-        <div className="bg-emerald-500/30 border border-emerald-500/20 text-emerald-400 p-4 rounded-xl flex items-center justify-between mb-6">
+        <div className="bg-green-500/30 border border-green-500/20 text-emerald-400 p-4 rounded-xl flex items-center justify-between mb-6">
           <div>
             <h3 className="font-bold flex items-center gap-2">Membro adicionado com sucesso!</h3>
             <p className="text-sm mt-1">Copie o token de acesso. Ele não ficará visível novamente:</p>
-            <div className="bg-[#0f1721] px-4 py-2 rounded-lg border border-white/10 font-mono mt-3 inline-block font-bold">
+            <div className="bg-[#210606] px-4 py-2 rounded-lg border border-white/10 font-mono mt-3 inline-block font-bold">
               {newToken}
             </div>
           </div>
-          <button onClick={() => setNewToken(null)} className="p-2 hover:bg-emerald-500/20 rounded-lg">
+          <button onClick={() => setNewToken(null)} className="p-2 hover:bg-green-500/20 rounded-lg">
             <Trash2 size={20} />
           </button>
         </div>
       )}
 
       {sortedMembers.length === 0 ? (
-        <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-12 text-center text-gray-300">
+        <div className="bg-[#210606] border border-white/10 rounded-2xl p-12 text-center text-gray-300">
           Nenhum membro cadastrado. Comece adicionando um membro à sua equipe.
         </div>
       ) : (
@@ -108,8 +108,8 @@ export default function Members() {
 const MemberCard: React.FC<{ member: Member, onTogglePin: () => void, onEdit: () => void, onDelete: () => void }> = ({ member, onTogglePin, onEdit, onDelete }) => {
   return (
     <div className={cn(
-      "bg-[#0f1720] border rounded-2xl p-6 transition-all relative group shadow-md flex flex-col items-center text-center",
-      member.isPinned ? "border-nexora-neon/50 shadow-nexora-neon/10" : "border-white/10 hover:border-white/10"
+      "bg-[#210606] border rounded-2xl p-6 transition-all relative group shadow-md flex flex-col items-center text-center",
+      member.isPinned ? "border-tecnova-neon/50 shadow-tecnova-neon/10" : "border-white/10 hover:border-white/10"
     )}>
       {/* Actions */}
       <div className="absolute top-4 right-4 flex items-center gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
@@ -125,7 +125,7 @@ const MemberCard: React.FC<{ member: Member, onTogglePin: () => void, onEdit: ()
         </button>
         <button 
           onClick={onEdit} 
-          className="p-1.5 rounded-md text-gray-400 hover:text-nexora-neon hover:bg-nexora-neon/10 transition-colors"
+          className="p-1.5 rounded-md text-gray-400 hover:text-tecnova-neon hover:bg-tecnova-neon/10 transition-colors"
           title="Editar membro"
         >
           <Edit2 size={16} />
@@ -141,7 +141,7 @@ const MemberCard: React.FC<{ member: Member, onTogglePin: () => void, onEdit: ()
 
       {/* Avatar */}
       <div className="relative mb-4">
-        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-nexora-neon/30 p-1">
+        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-tecnova-neon/30 p-1">
           <img 
             src={member.photoUrl || `https://ui-avatars.com/api/?name=${member.firstName}+${member.lastName}&background=151f28&color=00d4ff`} 
             alt={`${member.firstName} ${member.lastName}`} 
@@ -149,7 +149,7 @@ const MemberCard: React.FC<{ member: Member, onTogglePin: () => void, onEdit: ()
           />
         </div>
         {member.isPinned && (
-          <div className="absolute -top-1 -right-1 bg-amber-400 text-[#070d14] font-bold p-1 rounded-full border-2 border-nexora-card">
+          <div className="absolute -top-1 -right-1 bg-amber-400 text-[#0a0a0a] font-bold p-1 rounded-full border-2 border-tecnova-card">
             <Pin size={12} fill="currentColor" />
           </div>
         )}
@@ -190,7 +190,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm">
-      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
         <div className="p-6 border-b border-white/5">
           <h2 className="text-xl font-bold text-white">{isEditing ? 'Editar Membro' : 'Adicionar Novo Membro'}</h2>
           <p className="text-sm text-gray-400 mt-1">{isEditing ? 'Atualize as informações do membro.' : 'Preencha os dados para cadastrar na equipe.'}</p>
@@ -204,7 +204,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
                 required 
                 value={firstName} 
                 onChange={e => setFirstName(e.target.value)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                 placeholder="Ex: João"
               />
             </div>
@@ -215,7 +215,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
                 required 
                 value={lastName} 
                 onChange={e => setLastName(e.target.value)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                 placeholder="Ex: Silva"
               />
             </div>
@@ -227,7 +227,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
               required 
               value={roles} 
               onChange={e => setRoles(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
               placeholder="Ex: Marketing, Design (separe por vírgula)"
             />
           </div>
@@ -237,7 +237,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
               type="url" 
               value={photoUrl} 
               onChange={e => setPhotoUrl(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
               placeholder="https://exemplo.com/foto.jpg"
             />
           </div>
@@ -252,7 +252,7 @@ function MemberModal({ onClose, onSave, initialData }: { onClose: () => void, on
             </button>
             <button 
               type="submit" 
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-nexora-neon hover:opacity-90 transition-opacity"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-red-600 to-tecnova-neon hover:opacity-90 transition-opacity"
             >
               {isEditing ? 'Salvar Alterações' : 'Salvar Membro'}
             </button>
