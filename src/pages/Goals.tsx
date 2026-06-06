@@ -210,7 +210,7 @@ export default function Goals() {
                    </div>
 
                    {ag.rewardText && (
-                     <div className="bg-[rgba(0,0,0,0.2)] p-3 rounded-xl border border-white/5">
+                     <div className="bg-[#0a0a0a] p-3 rounded-xl border border-white/5">
                        <p className="text-xs text-tecnova-neon uppercase tracking-widest mb-1">Recompensa</p>
                        <p className="text-sm font-medium text-white/90">{ag.rewardText}</p>
                      </div>
@@ -291,10 +291,10 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                 setType(e.target.value as GoalType);
                 setAmount('');
               }}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             >
-              <option value="Faturamento">Faturamento (Implantação + Mensalidade)</option>
-              <option value="Vendas">Vendas (Só Implantação)</option>
+              <option className="bg-[#210606] text-white" value="Faturamento">Faturamento (Implantação + Mensalidade)</option>
+              <option className="bg-[#210606] text-white" value="Vendas">Vendas (Só Implantação)</option>
             </select>
           </div>
 
@@ -302,10 +302,10 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
             <label className="text-xs font-medium text-gray-400">Período</label>
             <select 
               value={period} onChange={e => setPeriod(e.target.value as GoalPeriod)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             >
-              <option value="Mensal">Mensal</option>
-              <option value="Semanal">Semanal</option>
+              <option className="bg-[#210606] text-white" value="Mensal">Mensal</option>
+              <option className="bg-[#210606] text-white" value="Semanal">Semanal</option>
             </select>
           </div>
 
@@ -318,7 +318,7 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
               required 
               value={amount} 
               onChange={handleAmountChange}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
               placeholder={type === 'Vendas' ? '0' : '0,00'}
             />
           </div>
@@ -333,7 +333,7 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
             </button>
             <button
               type="submit"
-              className="flex-1 py-2 bg-tecnova-neon text-black rounded-lg hover:bg-opacity-90 transition-colors font-medium text-sm"
+              className="flex-1 py-2 bg-tecnova-neon text-white rounded-lg hover:bg-opacity-90 transition-colors font-medium text-sm"
             >
               Adicionar
             </button>
