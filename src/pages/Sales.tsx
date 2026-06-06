@@ -174,7 +174,7 @@ function LeadSelect({ onSelectLead }: { onSelectLead: (lead: Lead | null) => voi
       <label className="text-xs font-medium text-gray-400 block mb-1.5">Vincular Lead Existente (Opcional)</label>
       <div 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer hover:border-white/20 transition-colors"
+        className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white flex justify-between items-center cursor-pointer hover:border-white/20 transition-colors"
       >
         <span className={selectedLead ? "text-white" : "text-gray-500"}>
           {selectedLead ? `${selectedLead.name} ${selectedLead.companyName ? `(${selectedLead.companyName})` : ''}` : "Selecionar Lead (Somente 'Fechado')"}
@@ -183,14 +183,14 @@ function LeadSelect({ onSelectLead }: { onSelectLead: (lead: Lead | null) => voi
       </div>
 
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg shadow-xl overflow-hidden">
+        <div className="absolute z-10 w-full mt-1 bg-black/30 border border-white/10 rounded-lg shadow-xl overflow-hidden">
           <div className="p-2 border-b border-white/5 bg-[#210606]">
             <input 
               type="text" 
               placeholder="Buscar por nome ou empresa..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-md px-3 py-1.5 text-xs text-white focus:outline-none focus:border-tecnova-neon"
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-md px-3 py-1.5 text-xs text-white focus:outline-none focus:border-tecnova-neon"
             />
           </div>
           <div className="max-h-48 overflow-y-auto w-full">
@@ -363,7 +363,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
           <p className="text-sm text-gray-400 mt-1">Preencha os dados do projeto fechado.</p>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          <div className="bg-black/20 p-4 rounded-xl border border-white/5 mb-6">
+          <div className="bg-[#0a0a0a] p-4 rounded-xl border border-white/5 mb-6">
             <LeadSelect onSelectLead={handleSelectLead} />
             <p className="text-xs text-gray-500 mt-2">Ao selecionar um lead, os dados do cliente serão preenchidos automaticamente.</p>
           </div>
@@ -378,10 +378,10 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                 <select 
                   value={category}
                   onChange={(e) => setCategory(e.target.value as ServiceCategory)}
-                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors appearance-none"
+                  className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors appearance-none"
                 >
                   {CATEGORIES.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
+                    <option className="bg-[#210606] text-white" key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>
               </div>
@@ -393,7 +393,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   required 
                   value={price} 
                   onChange={handlePriceChange}
-                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+                  className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   placeholder="Ex: 3.500,00"
                 />
               </div>
@@ -404,7 +404,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   type="text" 
                   value={mrr} 
                   onChange={handleMrrChange}
-                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+                  className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   placeholder="Ex: 150,00"
                 />
               </div>
@@ -421,7 +421,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     required 
                     value={companyName} 
                     onChange={e => setCompanyName(e.target.value)}
-                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                    className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -431,7 +431,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     required 
                     value={businessType} 
                     onChange={e => setBusinessType(e.target.value)}
-                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                    className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                     placeholder="Ex: Pizzaria"
                   />
                 </div>
@@ -444,7 +444,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   required 
                   value={ownerName} 
                   onChange={e => setOwnerName(e.target.value)}
-                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                  className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                 />
               </div>
 
@@ -456,7 +456,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     required 
                     value={whatsapp} 
                     onChange={e => setWhatsapp(e.target.value)}
-                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                    className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                     placeholder="DD NNNNN-NNNN"
                   />
                 </div>
@@ -466,7 +466,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     type="text" 
                     value={siteUrl} 
                     onChange={e => setSiteUrl(e.target.value)}
-                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
+                    className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                     placeholder="exemplo.com.br"
                   />
                 </div>
@@ -487,11 +487,11 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   <select 
                     value={responsibleId}
                     onChange={(e) => setResponsibleId(e.target.value)}
-                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+                    className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   >
-                    <option value="">Nenhum (Sem comissão)</option>
+                    <option className="bg-[#210606] text-white" value="">Nenhum (Sem comissão)</option>
                     {members.map(m => (
-                      <option key={m.id} value={m.id}>
+                      <option className="bg-[#210606] text-white" key={m.id} value={m.id}>
                         {m.id === currentUserId ? `(Eu) ${m.firstName} ${m.lastName}` : `${m.firstName} ${m.lastName}`}
                       </option>
                     ))}
@@ -517,9 +517,9 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                         value={respBasis} onChange={e => setRespBasis(e.target.value as any)}
                         className="w-full bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                       >
-                        <option value="Implantação">Implant. Única</option>
-                        <option value="Recorrência">Recorrência (Mensal)</option>
-                        <option value="Ambos">Ambos</option>
+                        <option className="bg-[#210606] text-white" value="Implantação">Implant. Única</option>
+                        <option className="bg-[#210606] text-white" value="Recorrência">Recorrência (Mensal)</option>
+                        <option className="bg-[#210606] text-white" value="Ambos">Ambos</option>
                       </select>
                     </div>
                   </div>
@@ -532,11 +532,11 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                   <select 
                     value={indicatorId}
                     onChange={(e) => setIndicatorId(e.target.value)}
-                    className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
+                    className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
                   >
-                    <option value="">Nenhum</option>
+                    <option className="bg-[#210606] text-white" value="">Nenhum</option>
                     {members.map(m => (
-                      <option key={m.id} value={m.id}>
+                      <option className="bg-[#210606] text-white" key={m.id} value={m.id}>
                         {m.id === currentUserId ? `(Eu) ${m.firstName} ${m.lastName}` : `${m.firstName} ${m.lastName}`}
                       </option>
                     ))}
@@ -562,9 +562,9 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                         value={indBasis} onChange={e => setIndBasis(e.target.value as any)}
                         className="w-full bg-[rgba(0,0,0,0.3)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
                       >
-                        <option value="Implantação">Implant. Única</option>
-                        <option value="Recorrência">Recorrência (Mensal)</option>
-                        <option value="Ambos">Ambos</option>
+                        <option className="bg-[#210606] text-white" value="Implantação">Implant. Única</option>
+                        <option className="bg-[#210606] text-white" value="Recorrência">Recorrência (Mensal)</option>
+                        <option className="bg-[#210606] text-white" value="Ambos">Ambos</option>
                       </select>
                     </div>
                   </div>
