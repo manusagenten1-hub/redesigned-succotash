@@ -40,7 +40,7 @@ export default function Expenses() {
               placeholder="Buscar despesa..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#0f1720] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-red-400/50 transition-colors"
+              className="w-full pl-9 pr-4 py-2 bg-[#210606] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-red-400/50 transition-colors"
             />
           </div>
           <button
@@ -54,7 +54,7 @@ export default function Expenses() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div className="bg-[#0f1720] border border-rose-500/20 rounded-xl p-5 shadow-md relative overflow-hidden group">
+        <div className="bg-[#210606] border border-rose-500/20 rounded-xl p-5 shadow-md relative overflow-hidden group">
           <div className="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-br from-rose-500/20 to-transparent opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none"></div>
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-2">
@@ -64,7 +64,7 @@ export default function Expenses() {
             <p className="text-2xl font-bold text-white tracking-tight">{formatSec(totalMonthlyRecurring)}</p>
           </div>
         </div>
-        <div className="bg-nexora-card border border-orange-500/20 rounded-xl p-5 shadow-sm relative overflow-hidden group">
+        <div className="bg-tecnova-card border border-orange-500/20 rounded-xl p-5 shadow-sm relative overflow-hidden group">
           <div className="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none"></div>
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-2">
@@ -76,7 +76,7 @@ export default function Expenses() {
         </div>
       </div>
 
-      <div className="bg-nexora-card border border-white/10 rounded-2xl shadow-lg overflow-hidden">
+      <div className="bg-tecnova-card border border-white/10 rounded-2xl shadow-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse whitespace-nowrap min-w-[800px]">
             <thead>
@@ -196,7 +196,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden my-auto">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden my-auto">
         <div className="p-6 border-b border-white/5 flex flex-col pt-8">
           <h2 className="text-xl font-bold text-rose-500">Registrar Despesa</h2>
           <p className="text-sm text-gray-400 mt-1">Adicione um novo custo ao seu fluxo de caixa.</p>
@@ -209,7 +209,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
               required 
               value={name} 
               onChange={e => setName(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
               placeholder="Ex: Assinatura Vercel"
             />
           </div>
@@ -222,7 +222,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
                 required 
                 value={amount} 
                 onChange={handleAmountChange}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50"
                 placeholder="0,00"
               />
             </div>
@@ -231,7 +231,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
               <select 
                 value={category}
                 onChange={(e) => setCategory(e.target.value as ExpenseCategory)}
-                className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
+                className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
               >
                 {CATEGORIES.map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
@@ -246,7 +246,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
                 <select 
                   value={type}
                   onChange={(e) => setType(e.target.value as ExpenseType)}
-                  className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
+                  className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 appearance-none"
                 >
                   <option value="Recorrente">Recorrente (Assinatura)</option>
                   <option value="Única">Custo Único</option>
@@ -255,7 +255,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
               {type === 'Recorrente' && (
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-400">Status da Assinatura</label>
-                  <div className="flex items-center gap-2 mt-1 w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 h-[38px] cursor-pointer" onClick={() => setIsActive(!isActive)}>
+                  <div className="flex items-center gap-2 mt-1 w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 h-[38px] cursor-pointer" onClick={() => setIsActive(!isActive)}>
                      <div className={cn("w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors", isActive ? "border-green-400" : "border-gray-500")}>
                         {isActive && <div className="w-2 h-2 rounded-full bg-green-400" />}
                      </div>
@@ -270,7 +270,7 @@ function AddExpenseModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data
             <textarea 
               value={description} 
               onChange={e => setDescription(e.target.value)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 min-h-[80px]"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500/50 min-h-[80px]"
               placeholder="Detalhes adicionais sobre a despesa..."
             />
           </div>
