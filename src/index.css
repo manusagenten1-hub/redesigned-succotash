@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-nexora-dark: #070d14;
-  --color-nexora-neon: #00e0ff;
-  --color-nexora-card: #0f1720;
+  --color-tecnova-dark: #0a0a0a;
+  --color-tecnova-neon: #F31333;
+  --color-tecnova-card: #210606;
+  --color-tecnova-primary: #E60000;
 
-  --color-background: var(--color-nexora-dark);
+  --color-background: var(--color-tecnova-dark);
   --color-foreground: #f8fafc;
 }
 
@@ -28,7 +29,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-nexora-dark);
+  background: var(--color-tecnova-dark);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -37,6 +38,6 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-nexora-neon);
+  background: var(--color-tecnova-neon);
 }
 
