@@ -245,7 +245,7 @@ export const AppLayout = () => {
               {/* Perfil */}
               <div className="space-y-4">
                 <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Seu Perfil</h3>
-                <div className="bg-[#151f28] border border-white/10 rounded-xl p-4 flex items-center gap-4">
+                <div className="bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-xl p-4 flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10">
                     <img src={currentMember?.photoUrl || `https://ui-avatars.com/api/?name=${currentUser.name}&background=151f28&color=ffffff`} alt={currentUser.name} className="w-full h-full object-cover" />
                   </div>
@@ -269,7 +269,7 @@ export const AppLayout = () => {
               {/* Player de Música */}
               <div className="space-y-4">
                 <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Música Ambiente</h3>
-                <div className="bg-[#151f28] border border-white/10 rounded-xl p-4 flex items-center justify-between gap-4">
+                <div className="bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-xl p-4 flex items-center justify-between gap-4">
                   <div className="flex flex-col">
                     <span className="text-sm font-bold text-white">Happy Nation</span>
                     <span className="text-xs text-gray-400">Ace of Base</span>
