@@ -64,7 +64,7 @@ export default function Commissions() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-6 relative overflow-hidden group">
+        <div className="bg-[#210606] border border-white/10 rounded-2xl p-6 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/30 rounded-full blur-3xl -mr-10 -mt-10 transition-transform group-hover:scale-110" />
           <div className="flex items-center justify-between relative z-10">
             <div>
@@ -77,21 +77,21 @@ export default function Commissions() {
           </div>
         </div>
 
-        <div className="bg-[#0f1720] border border-white/10 rounded-2xl p-6 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl -mr-10 -mt-10 transition-transform group-hover:scale-110" />
+        <div className="bg-[#210606] border border-white/10 rounded-2xl p-6 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl -mr-10 -mt-10 transition-transform group-hover:scale-110" />
           <div className="flex items-center justify-between relative z-10">
             <div>
               <p className="text-gray-400 text-sm font-medium mb-1">Total Pendente</p>
               <h3 className="text-2xl font-bold text-white">{formatSec(totalPending)}</h3>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400">
+            <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center text-amber-400">
               <Clock size={24} />
             </div>
           </div>
         </div>
 
-        <div className="bg-nexora-card border border-white/5 rounded-2xl p-6 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -mr-10 -mt-10 transition-transform group-hover:scale-110" />
+        <div className="bg-tecnova-card border border-white/5 rounded-2xl p-6 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-3xl -mr-10 -mt-10 transition-transform group-hover:scale-110" />
           <div className="flex items-center justify-between relative z-10">
             <div>
               <p className="text-gray-400 text-sm font-medium mb-1">Top Vendedor</p>
@@ -99,7 +99,7 @@ export default function Commissions() {
                 {memberPerformances.length > 0 ? memberPerformances[0].name : '-'}
               </h3>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400">
+            <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400">
               <TrendingUp size={24} />
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function Commissions() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-nexora-card border border-white/5 rounded-2xl p-6">
+        <div className="lg:col-span-2 bg-tecnova-card border border-white/5 rounded-2xl p-6">
           <h3 className="text-lg font-bold text-white mb-6">Comissões por Membro (Top 5)</h3>
           <div className="h-64">
             {chartData.length > 0 ? (
@@ -118,7 +118,7 @@ export default function Commissions() {
                   <YAxis stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `R$${value/1000}k`} />
                   <Tooltip 
                     cursor={{ fill: '#ffffff05' }}
-                    contentStyle={{ backgroundColor: '#151f28', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
+                    contentStyle={{ backgroundColor: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
                     formatter={(value: number) => formatSec(value)}
                   />
                   <Legend wrapperStyle={{ paddingTop: '20px' }} iconType="circle" />
@@ -133,7 +133,7 @@ export default function Commissions() {
           </div>
         </div>
 
-        <div className="bg-nexora-card border border-white/5 rounded-2xl p-6 overflow-hidden flex flex-col">
+        <div className="bg-tecnova-card border border-white/5 rounded-2xl p-6 overflow-hidden flex flex-col">
           <h3 className="text-lg font-semibold text-white mb-4">Ranking de Comissionados</h3>
           <div className="flex-1 overflow-y-auto space-y-4">
             {memberPerformances.length === 0 ? (
@@ -144,7 +144,7 @@ export default function Commissions() {
                 return (
                   <div key={perf.memberId} className="flex items-center justify-between p-3 rounded-xl bg-white/[0.04] border border-white/5">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-nexora-neon/20 flex items-center justify-center text-nexora-neon font-bold text-sm">
+                      <div className="w-8 h-8 rounded-full bg-tecnova-neon/20 flex items-center justify-center text-tecnova-neon font-bold text-sm">
                         {index + 1}
                       </div>
                       <div>
@@ -164,7 +164,7 @@ export default function Commissions() {
         </div>
       </div>
 
-      <div className="bg-nexora-card border border-white/5 rounded-2xl shadow-lg mt-8">
+      <div className="bg-tecnova-card border border-white/5 rounded-2xl shadow-lg mt-8">
         <div className="p-4 sm:p-6 border-b border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h2 className="text-xl font-bold text-white">Histórico de Comissões</h2>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
@@ -177,13 +177,13 @@ export default function Commissions() {
                 placeholder="Buscar membro..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-[#0f1721] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-nexora-neon transition-colors"
+                className="w-full pl-9 pr-4 py-2 bg-[#210606] border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-tecnova-neon transition-colors"
               />
             </div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="bg-[#0f1721] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="bg-[#210606] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             >
               <option value="Todos">Todos</option>
               <option value="Pendente">Pendentes</option>
@@ -224,7 +224,7 @@ export default function Commissions() {
                       <td className="p-4">
                         <span className={cn(
                           "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border",
-                          commission.type === 'Fechamento' ? "bg-blue-500/10 text-blue-400 border-blue-500/20" : "bg-purple-500/10 text-purple-400 border-purple-500/20"
+                          commission.type === 'Fechamento' ? "bg-red-500/10 text-red-400 border-red-500/20" : "bg-rose-500/10 text-purple-400 border-rose-500/20"
                         )}>
                           {commission.type}
                         </span>
@@ -249,7 +249,7 @@ export default function Commissions() {
                             </span>
                           ) : (
                             <div className="flex items-center gap-2">
-                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-amber-400 border border-orange-500/20">
                                 <Clock size={12} />
                                 Pendente
                               </span>
