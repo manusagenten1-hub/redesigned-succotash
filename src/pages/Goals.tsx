@@ -63,7 +63,7 @@ export default function Goals() {
         {goals.length < 2 && activeTab === 'ativas' && (
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="bg-nexora-neon text-[#070d14] font-bold px-4 py-2 rounded-lg font-medium hover:bg-opacity-90 transition-colors flex items-center gap-2 shadow-lg shadow-nexora-neon/20"
+            className="bg-tecnova-neon text-[#0a0a0a] font-bold px-4 py-2 rounded-lg font-medium hover:bg-opacity-90 transition-colors flex items-center gap-2 shadow-lg shadow-tecnova-neon/20"
           >
             <Plus size={18} />
             Nova Meta
@@ -76,24 +76,24 @@ export default function Goals() {
           onClick={() => setActiveTab('ativas')}
           className={cn(
             "pb-3 text-sm font-medium transition-colors relative",
-            activeTab === 'ativas' ? "text-nexora-neon" : "text-gray-300 hover:text-white"
+            activeTab === 'ativas' ? "text-tecnova-neon" : "text-gray-300 hover:text-white"
           )}
         >
           Metas Ativas
           {activeTab === 'ativas' && (
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-nexora-neon rounded-t-md"></span>
+            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tecnova-neon rounded-t-md"></span>
           )}
         </button>
         <button
           onClick={() => setActiveTab('antigas')}
           className={cn(
             "pb-3 text-sm font-medium transition-colors relative",
-            activeTab === 'antigas' ? "text-nexora-neon" : "text-gray-300 hover:text-white"
+            activeTab === 'antigas' ? "text-tecnova-neon" : "text-gray-300 hover:text-white"
           )}
         >
           Metas Antigas
           {activeTab === 'antigas' && (
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-nexora-neon rounded-t-md"></span>
+            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tecnova-neon rounded-t-md"></span>
           )}
         </button>
       </div>
@@ -104,7 +104,7 @@ export default function Goals() {
             const { progressValue, percentage } = calculateProgress(goal);
             
             return (
-              <div key={goal.id} className="bg-[#0f1720] border border-white/10 rounded-2xl p-6 relative overflow-hidden flex flex-col items-center">
+              <div key={goal.id} className="bg-[#210606] border border-white/10 rounded-2xl p-6 relative overflow-hidden flex flex-col items-center">
                 <button 
                   onClick={() => deleteGoal(goal.id)}
                   className="absolute top-4 right-4 p-2 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded-md transition-colors"
@@ -132,8 +132,8 @@ export default function Goals() {
                         dataKey="value"
                         stroke="none"
                       >
-                        <Cell fill="#00d4ff" />
-                        <Cell fill="#1a2332" />
+                        <Cell fill="#F31333" />
+                        <Cell fill="rgba(0,0,0,0.3)" />
                       </Pie>
                     </PieChart>
                   </ResponsiveContainer>
@@ -153,7 +153,7 @@ export default function Goals() {
           })}
           
           {goals.length === 0 && (
-            <div className="col-span-1 md:col-span-2 text-center text-gray-500 py-12 bg-[#0f1720] border border-white/5 rounded-2xl">
+            <div className="col-span-1 md:col-span-2 text-center text-gray-500 py-12 bg-[#210606] border border-white/5 rounded-2xl">
               <Trophy size={48} className="mx-auto text-gray-700 mb-4" />
               <p className="text-lg font-medium text-white/70">Nenhuma meta ativa</p>
               <p className="text-sm mt-1">Clique em "Nova Meta" para adicionar.</p>
@@ -163,7 +163,7 @@ export default function Goals() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievedGoals.length === 0 ? (
-            <div className="col-span-full text-center text-gray-500 py-12 bg-nexora-card border border-white/5 rounded-2xl">
+            <div className="col-span-full text-center text-gray-500 py-12 bg-tecnova-card border border-white/5 rounded-2xl">
               <Trophy size={48} className="mx-auto text-gray-700 mb-4 opacity-50" />
               <p className="text-lg font-medium text-white/70">Nenhum histórico de metas</p>
               <p className="text-sm mt-1">Quando uma meta acabar seu prazo ou for batida, ela aparecerá aqui.</p>
@@ -173,7 +173,7 @@ export default function Goals() {
                const isAchieved = ag.status === 'Batida';
                return (
                <div key={ag.id} className={cn(
-                 "bg-nexora-card border rounded-2xl p-6 relative overflow-hidden group",
+                 "bg-tecnova-card border rounded-2xl p-6 relative overflow-hidden group",
                  isAchieved ? "border-green-500/30" : "border-red-500/20"
                )}>
                  <button 
@@ -210,8 +210,8 @@ export default function Goals() {
                    </div>
 
                    {ag.rewardText && (
-                     <div className="bg-[#151f28] p-3 rounded-xl border border-white/5">
-                       <p className="text-xs text-nexora-neon uppercase tracking-widest mb-1">Recompensa</p>
+                     <div className="bg-[rgba(0,0,0,0.2)] p-3 rounded-xl border border-white/5">
+                       <p className="text-xs text-tecnova-neon uppercase tracking-widest mb-1">Recompensa</p>
                        <p className="text-sm font-medium text-white/90">{ag.rewardText}</p>
                      </div>
                    )}
@@ -277,7 +277,7 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 py-8 md:p-8 bg-black/60 backdrop-blur-sm">
-      <div className="bg-[#0f1721] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+      <div className="bg-[#210606] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
         <div className="p-6 border-b border-white/5 flex flex-col pt-8">
           <h2 className="text-xl font-bold text-white">Adicionar Meta</h2>
           <p className="text-sm text-gray-400 mt-1">Defina sua meta de resultados.</p>
@@ -291,7 +291,7 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                 setType(e.target.value as GoalType);
                 setAmount('');
               }}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             >
               <option value="Faturamento">Faturamento (Implantação + Mensalidade)</option>
               <option value="Vendas">Vendas (Só Implantação)</option>
@@ -302,7 +302,7 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
             <label className="text-xs font-medium text-gray-400">Período</label>
             <select 
               value={period} onChange={e => setPeriod(e.target.value as GoalPeriod)}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
             >
               <option value="Mensal">Mensal</option>
               <option value="Semanal">Semanal</option>
@@ -318,7 +318,7 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
               required 
               value={amount} 
               onChange={handleAmountChange}
-              className="w-full bg-[#151f28] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-nexora-neon"
+              className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon"
               placeholder={type === 'Vendas' ? '0' : '0,00'}
             />
           </div>
@@ -333,7 +333,7 @@ function AddGoalModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
             </button>
             <button
               type="submit"
-              className="flex-1 py-2 bg-nexora-neon text-black rounded-lg hover:bg-opacity-90 transition-colors font-medium text-sm"
+              className="flex-1 py-2 bg-tecnova-neon text-black rounded-lg hover:bg-opacity-90 transition-colors font-medium text-sm"
             >
               Adicionar
             </button>
