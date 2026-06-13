@@ -15,18 +15,6 @@ import Goals from './pages/Goals';
 import AdminDashboard from './pages/AdminDashboard';
 import { getCurrentUser } from './lib/auth';
 
-const AdminRoute = ({ children }: { children: React.ReactNode }) => {
-  const currentUser = getCurrentUser();
-  const { members } = useAppContext();
-  const currentMember = members.find(m => String(m.id) === String(currentUser.id));
-  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role.replace(/[{}"\\]/g, '').includes('CEO') || currentUser.role.replace(/[{}"\\]/g, '').includes('Admin');
-  
-  if (!hasAdminAccess) {
-    return <Navigate to="/" replace />;
-  }
-  return <>{children}</>;
-};
-
 export default function App() {
   return (
     <AppProvider>
@@ -43,11 +31,7 @@ export default function App() {
               <Route path="clientes" element={<Clients />} />
               <Route path="despesas" element={<Expenses />} />
               <Route path="membros" element={<Members />} />
-              <Route path="admin" element={
-                <AdminRoute>
-                  <AdminDashboard />
-                </AdminRoute>
-              } />
+              <Route path="admin" element={<AdminDashboard />} />
             </Route>
           </Routes>
         </BrowserRouter>
