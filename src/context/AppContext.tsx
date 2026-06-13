@@ -44,8 +44,13 @@ const initialMembers: Member[] = [{ id: 'm1', firstName: 'Lucas', lastName: 'Fra
 export const REWARDS = ['Rodízio de pizza', 'Hambúrguer artesanal', 'Sushi night', 'Cinema juntos', 'Churrasco simples', 'Café + reunião descontraída', 'Noite de jogos/resenha', 'Passeio em grupo', 'Sessão de filmes/séries', 'Pedir comida e trabalhar ouvindo música', 'Dia de descanso total', 'Meio período livre', 'Final de semana sem trabalho', 'Dia sem reuniões', 'Dia focado apenas em ideias leves', 'Upgrade em equipamento', 'Investimento em ferramenta nova', 'Comprar plugin/ferramenta premium', 'Pequeno orçamento para tráfego pago', 'Guardar lucro para objetivo maior da agência'];
 
 // Mappers
-const mTo=(m: Member)=>({ id: m.id, first_name: m.firstName, last_name: m.lastName, roles: m.roles, photo_url: m.photoUrl, is_pinned: m.isPinned, token: m.token });
-const mFr=(m: any): Member=>({ id: m.id, firstName: m.first_name, lastName: m.last_name, roles: m.roles, photoUrl: m.photo_url, isPinned: m.is_pinned, token: m.token });
+const parseRoles = (r: any) => {
+  if (Array.isArray(r)) return r;
+  if (typeof r === 'string') return r.replace(/^{|}$/g, '').split(',').map(s => s.replace(/(^"|"$)/g, '').trim());
+  return ['Membro'];
+};
+const mTo = (m: Member) => ({ id: m.id, first_name: m.firstName, last_name: m.lastName, roles: m.roles, photo_url: m.photoUrl, is_pinned: m.isPinned, token: m.token });
+const mFr = (m: any): Member => ({ id: m.id, firstName: m.first_name || '', lastName: m.last_name || '', roles: parseRoles(m.roles), photoUrl: m.photo_url || '', isPinned: m.is_pinned || false, token: m.token });
 const lTo=(l: Lead)=>({ id: l.id, name: l.name, company_name: l.companyName, whatsapp: l.whatsapp, source: l.source, status: l.status, notes: l.notes, date: l.date, created_by: l.createdBy });
 const lFr=(l: any): Lead=>({ id: l.id, name: l.name, companyName: l.company_name, whatsapp: l.whatsapp, source: l.source, status: l.status, notes: l.notes, date: l.date, createdBy: l.created_by });
 const sTo=(s: Sale)=>({ id: s.id, lead_id: s.leadId, category: s.category, business_type: s.businessType, company_name: s.companyName, owner_name: s.ownerName, whatsapp: s.whatsapp, site_url: s.siteUrl, price: s.price, mrr: s.mrr, date: s.date, responsible_id: s.responsibleId, indicator_id: s.indicatorId, created_by: s.createdBy });
