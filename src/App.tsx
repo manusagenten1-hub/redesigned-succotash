@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AppProvider } from './context/AppContext';
+import { AppProvider, useAppContext } from './context/AppContext';
 import { AppLayout } from './components/AppLayout';
 import AuthWrapper from './components/AuthWrapper';
 import Dashboard from './pages/Dashboard';
@@ -17,7 +17,11 @@ import { getCurrentUser } from './lib/auth';
 
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   const currentUser = getCurrentUser();
-  if (currentUser.role !== 'CEO') {
+  const { members } = useAppContext();
+  const currentMember = members.find(m => m.id === currentUser.id);
+  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role === 'CEO' || currentUser.role === 'Admin';
+  
+  if (!hasAdminAccess) {
     return <Navigate to="/" replace />;
   }
   return <>{children}</>;
