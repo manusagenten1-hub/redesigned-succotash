@@ -81,7 +81,9 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
   const [isOpen, setIsOpen] = useState(false);
   const currentUser = getCurrentUser();
   const { members } = useAppContext();
-  const currentMember = members.find(m => String(m.id) === String(currentUser.id));
+  
+  const cleanCurrentUserId = currentUser.id ? String(currentUser.id).replace(/['"]/g, '').trim() : '';
+  const currentMember = members.find(m => String(m.id).replace(/['"]/g, '').trim() === cleanCurrentUserId);
 
   const baseLinks = [
     { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
@@ -190,9 +192,10 @@ export const AppLayout = () => {
   const currentUser = getCurrentUser();
   const { members } = useAppContext();
 
-  const currentMember = members.find(m => String(m.id).trim() === String(currentUser.id).trim());
+  const cleanCurrentUserId = currentUser.id ? String(currentUser.id).replace(/['"]/g, '').trim() : '';
+  const currentMember = members.find(m => String(m.id).replace(/['"]/g, '').trim() === cleanCurrentUserId);
 
-  const storedName = currentUser.name?.replace('undefined undefined', '').trim();
+  const storedName = currentUser.name?.replace(/['"]/g, '').replace('undefined undefined', '').trim();
   const displayFirstName = currentMember?.firstName || storedName?.split(' ')[0] || 'Usuário';
   const displayLastName = currentMember?.lastName || storedName?.split(' ').slice(1).join(' ') || '';
   const displayFullName = `${displayFirstName} ${displayLastName}`.trim();
