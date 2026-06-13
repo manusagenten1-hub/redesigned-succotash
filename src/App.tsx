@@ -19,7 +19,7 @@ const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   const currentUser = getCurrentUser();
   const { members } = useAppContext();
   const currentMember = members.find(m => m.id === currentUser.id);
-  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role === 'CEO' || currentUser.role === 'Admin';
+  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role.replace(/[{}"\\]/g, '').includes('CEO') || currentUser.role.replace(/[{}"\\]/g, '').includes('Admin');
   
   if (!hasAdminAccess) {
     return <Navigate to="/" replace />;
