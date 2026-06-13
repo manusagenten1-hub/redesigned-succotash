@@ -18,7 +18,7 @@ import { getCurrentUser } from './lib/auth';
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   const currentUser = getCurrentUser();
   const { members } = useAppContext();
-  const currentMember = members.find(m => m.id === currentUser.id);
+  const currentMember = members.find(m => String(m.id) === String(currentUser.id));
   const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role.replace(/[{}"\\]/g, '').includes('CEO') || currentUser.role.replace(/[{}"\\]/g, '').includes('Admin');
   
   if (!hasAdminAccess) {
