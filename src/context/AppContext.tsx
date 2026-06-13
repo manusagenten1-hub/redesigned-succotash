@@ -148,9 +148,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   }, []);
 
-  const runInsert = async (table: string, data: any) => { await supabase.from(table).insert(data); };
-  const runUpdate = async (table: string, id: string, data: any) => { await supabase.from(table).update(data).eq('id', id); };
-  const runDelete = async (table: string, id: string) => { await supabase.from(table).delete().eq('id', id); };
+  const runInsert = async (table: string, data: any) => { 
+    const res = await supabase.from(table).insert(data);
+    if (res.error) console.error(`Error inserting into ${table}:`, res.error);
+    return res;
+  };
+  const runUpdate = async (table: string, id: string, data: any) => { 
+    const res = await supabase.from(table).update(data).eq('id', id);
+    if (res.error) console.error(`Error updating in ${table}:`, res.error);
+  };
+  const runDelete = async (table: string, id: string) => { 
+    const res = await supabase.from(table).delete().eq('id', id);
+    if (res.error) console.error(`Error deleting from ${table}:`, res.error);
+  };
 
   const addGoal = (goalData: Omit<Goal, 'id' | 'date'>) => {
     const newGoal = { ...goalData, id: Math.random().toString(36).substr(2, 9), date: new Date().toISOString() };
@@ -218,7 +228,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const cu = getCurrentUser();
     const n = { ...lData, id: Math.random().toString(36).substr(2, 9), date: new Date().toISOString(), createdBy: cu.id };
     setLeads(p => [n, ...p]); runInsert('leads', lTo(n));
-    logActivity({ type: 'ADD_LEAD', description: `${cu.name} adicionou um novo lead: ${lData.name}` });
+    logActivity({ type: 'ADD_LEAD', description: `${cu.name || 'Usuário'} adicionou um novo lead: ${lData.name}` });
   };
   const addMultipleLeads = async (lDataList: Omit<Lead, 'id' | 'date' | 'createdBy'>[]) => {
     const cu = getCurrentUser();
