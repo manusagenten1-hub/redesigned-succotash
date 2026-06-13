@@ -95,7 +95,7 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
     { to: '/membros', icon: Users, label: 'Equipe' },
   ];
 
-  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role === 'CEO' || currentUser.role === 'Admin';
+  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role.replace(/[{}"\\]/g, '').includes('CEO') || currentUser.role.replace(/[{}"\\]/g, '').includes('Admin');
 
   const links = hasAdminAccess 
     ? [...baseLinks, { to: '/admin', icon: ShieldCheck, label: 'Gestão da Equipe' }]
@@ -254,25 +254,21 @@ export const AppLayout = () => {
                     {currentMember?.photoUrl ? (
                       <img src={currentMember.photoUrl} alt="Avatar" className="w-full h-full object-cover" />
                     ) : (
-                      <span className="text-xl font-bold text-white">
-                        {currentMember ? currentMember.firstName.charAt(0) : currentUser.name?.charAt(0) || '?'}
+                      <span className="text-xl font-bold text-white uppercase">
+                        {(currentMember?.firstName || currentUser.name || '?').charAt(0)}
                       </span>
                     )}
                   </div>
                   <div>
                     <h4 className="text-base font-bold text-white">
-                      {currentMember ? `${currentMember.firstName} ${currentMember.lastName}` : currentUser.name || 'Usuário Desconhecido'}
+                      {currentMember ? `${currentMember.firstName} ${currentMember.lastName}` : currentUser.name || 'Usuário'}
                     </h4>
                     <div className="flex flex-wrap gap-1.5 mt-1.5">
-                      {currentMember?.roles.map(role => (
+                      {(currentMember?.roles.length ? currentMember.roles : [currentUser.role || 'Membro']).map(role => (
                         <span key={role} className="text-[10px] font-bold uppercase tracking-wider bg-white/5 text-[#F31333] border border-white/10 px-2 py-0.5 rounded">
-                          {role}
+                          {role.replace(/[{}"\\]/g, '')}
                         </span>
-                      )) || (
-                        <span className="text-[10px] font-bold uppercase tracking-wider bg-white/5 text-gray-300 border border-white/10 px-2 py-0.5 rounded">
-                          {currentUser.role || 'Sem Função'}
-                        </span>
-                      )}
+                      ))}
                     </div>
                   </div>
                 </div>
