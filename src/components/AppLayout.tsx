@@ -81,7 +81,7 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
   const [isOpen, setIsOpen] = useState(false);
   const currentUser = getCurrentUser();
   const { members } = useAppContext();
-  const currentMember = members.find(m => m.id === currentUser.id);
+  const currentMember = members.find(m => String(m.id) === String(currentUser.id));
 
   const baseLinks = [
     { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
@@ -194,7 +194,7 @@ export const AppLayout = () => {
   const currentUser = getCurrentUser();
   const { members } = useAppContext();
 
-  const currentMember = members.find(m => m.id === currentUser.id);
+  const currentMember = members.find(m => String(m.id) === String(currentUser.id));
 
   useEffect(() => {
     if (audioRef.current) {
