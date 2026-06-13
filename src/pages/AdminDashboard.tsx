@@ -15,7 +15,9 @@ export default function AdminDashboard() {
 
   // Helper to check if a date string falls within the current filter
   const isDateInFilter = (dateString: string) => {
+    if (!dateString) return false;
     const d = new Date(dateString);
+    if (isNaN(d.getTime())) return false;
     if (timeFilter === 'sempre') return true;
     if (timeFilter === 'personalizado') {
       let valid = true;
@@ -86,7 +88,11 @@ export default function AdminDashboard() {
       });
     });
 
-    return list.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return list.sort((a, b) => {
+      const timeA = new Date(a.date || 0).getTime();
+      const timeB = new Date(b.date || 0).getTime();
+      return (isNaN(timeB) ? 0 : timeB) - (isNaN(timeA) ? 0 : timeA);
+    });
   }, [sales, leads, agendaEvents, members]);
 
   // Filter activities by date
@@ -111,32 +117,35 @@ export default function AdminDashboard() {
     });
 
     sales.forEach(s => {
-      if (s.createdBy && isDateInFilter(s.date)) {
+      try {
+        if (!s || !s.createdBy || !isDateInFilter(s.date || '')) return;
         if (!map.has(s.createdBy)) {
           map.set(s.createdBy, { id: s.createdBy, name: 'Usuário ' + s.createdBy, leads: 0, reunioes: 0, vendas: 0, totalVendido: 0, ultimaAtividade: null });
         }
         const stats = map.get(s.createdBy);
         stats.vendas += 1;
         stats.totalVendido += (Number(s.price) || 0) + (Number(s.mrr) || 0);
-      }
+      } catch (e) { console.error(e); }
     });
 
     leads.forEach(l => {
-      if (l.createdBy && isDateInFilter(l.date)) {
+      try {
+        if (!l || !l.createdBy || !isDateInFilter(l.date || '')) return;
         if (!map.has(l.createdBy)) {
           map.set(l.createdBy, { id: l.createdBy, name: 'Usuário ' + l.createdBy, leads: 0, reunioes: 0, vendas: 0, totalVendido: 0, ultimaAtividade: null });
         }
         map.get(l.createdBy).leads += 1;
-      }
+      } catch (e) { console.error('Error generating metrics for lead', l); }
     });
 
     agendaEvents.forEach(e => {
-      if (e.createdBy && e.type === 'Reunião' && isDateInFilter(e.date)) {
+      try {
+        if (!e || !e.createdBy || e.type !== 'Reunião' || !isDateInFilter(e.date || '')) return;
         if (!map.has(e.createdBy)) {
           map.set(e.createdBy, { id: e.createdBy, name: 'Usuário ' + e.createdBy, leads: 0, reunioes: 0, vendas: 0, totalVendido: 0, ultimaAtividade: null });
         }
         map.get(e.createdBy).reunioes += 1;
-      }
+      } catch (err) { console.error(err); }
     });
 
     // Update last activity ignoring time filter
