@@ -26,7 +26,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
     // Check if already authenticated in this session
     const authStatus = localStorage.getItem('tecnova_auth');
     const currentUserId = localStorage.getItem('tecnova_userId');
-    const userExists = membersList.some(m => m.id === currentUserId);
+    const userExists = membersList.some(m => String(m.id) === String(currentUserId));
 
     if (authStatus === 'true' && userExists) {
       setIsAuthenticated(true);
