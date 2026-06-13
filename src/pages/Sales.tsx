@@ -492,7 +492,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     <option className="bg-[#210606] text-white" value="">Nenhum (Sem comissão)</option>
                     {members.map(m => (
                       <option className="bg-[#210606] text-white" key={m.id} value={m.id}>
-                        {m.id === currentUserId ? `(Eu) ${m.firstName} ${m.lastName}` : `${m.firstName} ${m.lastName}`}
+                        {String(m.id) === String(currentUserId) ? `(Eu) ${m.firstName} ${m.lastName}` : `${m.firstName} ${m.lastName}`}
                       </option>
                     ))}
                   </select>
@@ -537,7 +537,7 @@ function AddSaleModal({ onClose, onAdd }: { onClose: () => void, onAdd: (data: O
                     <option className="bg-[#210606] text-white" value="">Nenhum</option>
                     {members.map(m => (
                       <option className="bg-[#210606] text-white" key={m.id} value={m.id}>
-                        {m.id === currentUserId ? `(Eu) ${m.firstName} ${m.lastName}` : `${m.firstName} ${m.lastName}`}
+                        {String(m.id) === String(currentUserId) ? `(Eu) ${m.firstName} ${m.lastName}` : `${m.firstName} ${m.lastName}`}
                       </option>
                     ))}
                   </select>
