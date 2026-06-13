@@ -95,11 +95,7 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
     { to: '/membros', icon: Users, label: 'Equipe' },
   ];
 
-  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role.replace(/[{}"\\]/g, '').includes('CEO') || currentUser.role.replace(/[{}"\\]/g, '').includes('Admin');
-
-  const links = hasAdminAccess 
-    ? [...baseLinks, { to: '/admin', icon: ShieldCheck, label: 'Gestão da Equipe' }]
-    : baseLinks;
+  const links = [...baseLinks, { to: '/admin', icon: ShieldCheck, label: 'Gestão da Equipe' }];
 
   return (
     <>
@@ -194,7 +190,14 @@ export const AppLayout = () => {
   const currentUser = getCurrentUser();
   const { members } = useAppContext();
 
-  const currentMember = members.find(m => String(m.id) === String(currentUser.id));
+  const currentMember = members.find(m => String(m.id).trim() === String(currentUser.id).trim());
+
+  const storedName = currentUser.name?.replace('undefined undefined', '').trim();
+  const displayFirstName = currentMember?.firstName || storedName?.split(' ')[0] || 'Usuário';
+  const displayLastName = currentMember?.lastName || storedName?.split(' ').slice(1).join(' ') || '';
+  const displayFullName = `${displayFirstName} ${displayLastName}`.trim();
+  const displayRoles = currentMember?.roles?.length ? currentMember.roles : [currentUser.role || 'Membro'];
+  const displayInitial = displayFirstName.charAt(0).toUpperCase();
 
   useEffect(() => {
     if (audioRef.current) {
@@ -255,16 +258,16 @@ export const AppLayout = () => {
                       <img src={currentMember.photoUrl} alt="Avatar" className="w-full h-full object-cover" />
                     ) : (
                       <span className="text-xl font-bold text-white uppercase">
-                        {(currentMember?.firstName || currentUser.name || '?').charAt(0)}
+                        {displayInitial}
                       </span>
                     )}
                   </div>
                   <div>
                     <h4 className="text-base font-bold text-white">
-                      {currentMember ? `${currentMember.firstName} ${currentMember.lastName}` : currentUser.name || 'Usuário'}
+                      {displayFullName}
                     </h4>
                     <div className="flex flex-wrap gap-1.5 mt-1.5">
-                      {(currentMember?.roles.length ? currentMember.roles : [currentUser.role || 'Membro']).map(role => (
+                      {displayRoles.map(role => (
                         <span key={role} className="text-[10px] font-bold uppercase tracking-wider bg-white/5 text-[#F31333] border border-white/10 px-2 py-0.5 rounded">
                           {role.replace(/[{}"\\]/g, '')}
                         </span>
