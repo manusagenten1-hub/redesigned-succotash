@@ -58,7 +58,7 @@ const RewardModal = () => {
             A equipe atingiu a meta de {unlockedReward.goalType.toLowerCase()}!
           </p>
 
-          <div className="w-full bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-xl p-6 relative overflow-hidden group">
+          <div className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl p-6 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-r from-tecnova-neon/5 to-red-500/5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity" />
             <p className="text-xs font-bold text-tecnova-neon uppercase tracking-widest mb-2">Recompensa Desbloqueada</p>
             <p className="text-2xl font-bold text-white mb-1">{unlockedReward.rewardText}</p>
@@ -80,6 +80,8 @@ const RewardModal = () => {
 const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSettingsClick: () => void, isDesktopOpen: boolean, setDesktopOpen: (v: boolean) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const currentUser = getCurrentUser();
+  const { members } = useAppContext();
+  const currentMember = members.find(m => m.id === currentUser.id);
 
   const baseLinks = [
     { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
@@ -93,7 +95,9 @@ const Sidebar = ({ onSettingsClick, isDesktopOpen, setDesktopOpen }: { onSetting
     { to: '/membros', icon: Users, label: 'Equipe' },
   ];
 
-  const links = currentUser.role === 'CEO' 
+  const hasAdminAccess = currentMember?.roles.includes('CEO') || currentMember?.roles.includes('Admin') || currentUser.role === 'CEO' || currentUser.role === 'Admin';
+
+  const links = hasAdminAccess 
     ? [...baseLinks, { to: '/admin', icon: ShieldCheck, label: 'Gestão da Equipe' }]
     : baseLinks;
 
@@ -245,12 +249,20 @@ export const AppLayout = () => {
               {/* Perfil */}
               <div className="space-y-4">
                 <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Seu Perfil</h3>
-                <div className="bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-xl p-4 flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10">
-                    <img src={currentMember?.photoUrl || `https://ui-avatars.com/api/?name=${currentUser.name}&background=151f28&color=ffffff`} alt={currentUser.name} className="w-full h-full object-cover" />
+                <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-4 flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10 bg-gray-800 flex items-center justify-center">
+                    {currentMember?.photoUrl ? (
+                      <img src={currentMember.photoUrl} alt="Avatar" className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-xl font-bold text-white">
+                        {currentMember ? currentMember.firstName.charAt(0) : currentUser.name?.charAt(0) || '?'}
+                      </span>
+                    )}
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-white">{currentUser.name}</h4>
+                    <h4 className="text-base font-bold text-white">
+                      {currentMember ? `${currentMember.firstName} ${currentMember.lastName}` : currentUser.name || 'Usuário Desconhecido'}
+                    </h4>
                     <div className="flex flex-wrap gap-1.5 mt-1.5">
                       {currentMember?.roles.map(role => (
                         <span key={role} className="text-[10px] font-bold uppercase tracking-wider bg-white/5 text-[#F31333] border border-white/10 px-2 py-0.5 rounded">
@@ -258,7 +270,7 @@ export const AppLayout = () => {
                         </span>
                       )) || (
                         <span className="text-[10px] font-bold uppercase tracking-wider bg-white/5 text-gray-300 border border-white/10 px-2 py-0.5 rounded">
-                          {currentUser.role}
+                          {currentUser.role || 'Sem Função'}
                         </span>
                       )}
                     </div>
@@ -269,7 +281,7 @@ export const AppLayout = () => {
               {/* Player de Música */}
               <div className="space-y-4">
                 <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Música Ambiente</h3>
-                <div className="bg-[rgba(0,0,0,0.2)] border border-white/10 rounded-xl p-4 flex items-center justify-between gap-4">
+                <div className="bg-[#0a0a0a] border border-white/10 rounded-xl p-4 flex items-center justify-between gap-4">
                   <div className="flex flex-col">
                     <span className="text-sm font-bold text-white">Happy Nation</span>
                     <span className="text-xs text-gray-400">Ace of Base</span>
