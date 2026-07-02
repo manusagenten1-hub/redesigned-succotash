@@ -152,7 +152,9 @@ export default function Leads() {
           <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-3">
             Funil de Leads
             <span className="text-sm font-medium bg-white/10 text-gray-300 px-2.5 py-1 rounded-full">
-              {leads.length} {leads.length === 1 ? 'Lead' : 'Leads'}
+              {filteredLeads.length === leads.length 
+                ? `${leads.length} ${leads.length === 1 ? 'Lead' : 'Leads'}` 
+                : `${filteredLeads.length} de ${leads.length} Leads`}
             </span>
           </h1>
           <p className="text-gray-300 mt-1">Gestão rápida e automatizada de contatos.</p>
