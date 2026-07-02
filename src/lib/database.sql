@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS leads (
     whatsapp TEXT NOT NULL,
     source TEXT NOT NULL,
     status TEXT NOT NULL,
+    segment TEXT,
     notes TEXT,
     date TIMESTAMP WITH TIME ZONE NOT NULL,
     created_by TEXT REFERENCES members(id) ON DELETE SET NULL
