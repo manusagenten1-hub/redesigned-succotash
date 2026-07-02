@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useAppContext, Lead, LeadStatus, CalendarEvent } from '../context/AppContext';
+import { useAppContext, Lead, LeadStatus, CalendarEvent, LeadSegment } from '../context/AppContext';
 import { 
   Plus, Search, SearchX, MessageCircle, CalendarClock, Briefcase, 
   CheckCircle2, XCircle, AlertCircle, Clock, CalendarDays, 
@@ -13,6 +13,12 @@ const LEAD_STATUSES: LeadStatus[] = [
 ];
 
 const PREDEFINED_SOURCES = ['Tráfego pago', 'Instagram', 'Tik Tok', 'Prospecção', 'Indicação', 'Outro'];
+
+const LEAD_SEGMENTS: LeadSegment[] = [
+  'Clínicas', 'Escritórios de Advocacia', 'Escritórios de Contabilidade',
+  'Deliveries', 'Barbearias', 'Salões', 'Imobiliárias', 'Academias',
+  'Construtoras', 'Restaurantes', 'Lojas e Varejo', 'B2B', 'Outro'
+];
 
 // Color mapping for statuses
 const STATUS_COLORS: Record<LeadStatus, { bg: string, text: string, border: string }> = {
@@ -30,6 +36,7 @@ export default function Leads() {
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<LeadStatus | 'Todos'>('Todos');
+  const [segmentFilter, setSegmentFilter] = useState<LeadSegment | 'Todos'>('Todos');
   const [quickFilter, setQuickFilter] = useState<'Todos' | 'Sem Resposta' | 'Sem Follow-up' | 'Quentes'>('Todos');
   
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -128,13 +135,14 @@ export default function Leads() {
                           l.source.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesStatus = statusFilter === 'Todos' || l.status === statusFilter;
+    const matchesSegment = segmentFilter === 'Todos' || l.segment === segmentFilter;
     
     let matchesQuick = true;
     if (quickFilter === 'Sem Resposta') matchesQuick = l.noResponse;
     else if (quickFilter === 'Sem Follow-up') matchesQuick = l.needsFollowUp;
     else if (quickFilter === 'Quentes') matchesQuick = l.isHot;
 
-    return matchesSearch && matchesStatus && matchesQuick;
+    return matchesSearch && matchesStatus && matchesSegment && matchesQuick;
   });
 
   return (
@@ -195,6 +203,15 @@ export default function Leads() {
           {LEAD_STATUSES.map(s => <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>)}
         </select>
 
+        <select 
+          value={segmentFilter}
+          onChange={(e) => setSegmentFilter(e.target.value as any)}
+          className="bg-[#210606] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-gray-300 focus:outline-none focus:border-tecnova-neon appearance-none min-w-[150px]"
+        >
+          <option className="bg-[#210606] text-white" value="Todos">Todos os Segmentos</option>
+          {LEAD_SEGMENTS.map(s => <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>)}
+        </select>
+
         <div className="h-6 w-px bg-white/10 hidden sm:block mx-1"></div>
 
         <div className="flex flex-wrap gap-2">
@@ -246,7 +263,7 @@ export default function Leads() {
                     <div className="flex flex-col items-center justify-center">
                       <SearchX size={48} className="text-gray-400 mb-3" />
                       <p className="text-base font-medium text-gray-400">Nenhum lead encontrado com estes filtros.</p>
-                      <button onClick={() => { setStatusFilter('Todos'); setQuickFilter('Todos'); setSearchTerm(''); }} className="mt-3 text-tecnova-neon hover:underline text-sm">
+                      <button onClick={() => { setStatusFilter('Todos'); setSegmentFilter('Todos'); setQuickFilter('Todos'); setSearchTerm(''); }} className="mt-3 text-tecnova-neon hover:underline text-sm">
                         Limpar Filtros
                       </button>
                     </div>
@@ -268,6 +285,12 @@ export default function Leads() {
                             <span className="truncate max-w-[150px]">{lead.name}</span>
                             <span className="opacity-50 mx-1">•</span>
                             <span className="truncate">{lead.source}</span>
+                            {lead.segment && (
+                              <>
+                                <span className="opacity-50 mx-1">•</span>
+                                <span className="truncate text-tecnova-neon/80">{lead.segment}</span>
+                              </>
+                            )}
                           </div>
                         </div>
                       </td>
@@ -419,13 +442,14 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
   const [whatsapp, setWhatsapp] = useState(initialData?.whatsapp || '');
   const [source, setSource] = useState(initialData?.source || PREDEFINED_SOURCES[0]);
   const [status, setStatus] = useState<LeadStatus>(initialData?.status || 'Novo Lead');
+  const [segment, setSegment] = useState<LeadSegment | ''>(initialData?.segment || '');
   const [notes, setNotes] = useState(initialData?.notes || '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!whatsapp) return;
     const finalName = name.trim() ? name : 'Sem nome';
-    onSave({ name: finalName, companyName, whatsapp, source, status, notes });
+    onSave({ name: finalName, companyName, whatsapp, source, status, segment: segment || undefined, notes });
     onClose();
   };
 
@@ -486,17 +510,31 @@ function LeadModal({ onClose, onSave, initialData }: { onClose: () => void, onSa
               </select>
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-gray-400">Fase no Funil</label>
+              <label className="text-xs font-medium text-gray-400">Segmento</label>
               <select 
-                value={status}
-                onChange={e => setStatus(e.target.value as LeadStatus)}
+                value={segment}
+                onChange={e => setSegment(e.target.value as LeadSegment | '')}
                 className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
-                {LEAD_STATUSES.map(s => (
+                <option className="bg-[#210606] text-gray-400" value="">Não especificado</option>
+                {LEAD_SEGMENTS.map(s => (
                   <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
                 ))}
               </select>
             </div>
+          </div>
+          
+          <div className="space-y-1.5">
+            <label className="text-xs font-medium text-gray-400">Fase no Funil</label>
+            <select 
+              value={status}
+              onChange={e => setStatus(e.target.value as LeadStatus)}
+              className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+            >
+              {LEAD_STATUSES.map(s => (
+                <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
+              ))}
+            </select>
           </div>
 
           <div className="space-y-1.5">
@@ -538,6 +576,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
   const [isProcessing, setIsProcessing] = useState(false);
   const [source, setSource] = useState(PREDEFINED_SOURCES[0]);
   const [status, setStatus] = useState<LeadStatus>('Novo Lead');
+  const [segment, setSegment] = useState<LeadSegment | ''>('');
 
   const handleProcess = async () => {
     if (!rawText.trim()) return;
@@ -557,7 +596,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
 
       if (line.includes(',')) {
         if (pendingName) {
-           leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, notes: 'Importado em massa' });
+           leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, segment: segment || undefined, notes: 'Importado em massa' });
            pendingName = '';
         }
         const parts = line.split(',').map(p => p.trim());
@@ -570,21 +609,21 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
         } else if (parts.length === 2) {
           whatsapp = parts[1];
         }
-        leadsToInsert.push({ name, companyName, whatsapp, source, status, notes: 'Importado em massa' });
+        leadsToInsert.push({ name, companyName, whatsapp, source, status, segment: segment || undefined, notes: 'Importado em massa' });
       } else if (isPhoneLike) {
         const companyName = pendingName || '';
-        leadsToInsert.push({ name: 'Sem nome', companyName, whatsapp: line, source, status, notes: 'Importado em massa' });
+        leadsToInsert.push({ name: 'Sem nome', companyName, whatsapp: line, source, status, segment: segment || undefined, notes: 'Importado em massa' });
         pendingName = '';
       } else {
         if (pendingName) {
-           leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, notes: 'Importado em massa' });
+           leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, segment: segment || undefined, notes: 'Importado em massa' });
         }
         pendingName = line;
       }
     }
 
     if (pendingName) {
-      leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, notes: 'Importado em massa' });
+      leadsToInsert.push({ name: 'Sem nome', companyName: pendingName, whatsapp: '', source, status, segment: segment || undefined, notes: 'Importado em massa' });
     }
 
     if (leadsToInsert.length > 0) {
@@ -611,7 +650,7 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="space-y-1.5">
               <label className="text-xs font-medium text-gray-400">Origem Padrão</label>
               <select 
@@ -620,6 +659,19 @@ function BulkLeadModal({ onClose, onSave }: { onClose: () => void, onSave: (data
                 className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
               >
                 {PREDEFINED_SOURCES.map(s => (
+                  <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-gray-400">Segmento Padrão</label>
+              <select 
+                value={segment}
+                onChange={e => setSegment(e.target.value as LeadSegment | '')}
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-tecnova-neon appearance-none"
+              >
+                <option className="bg-[#210606] text-gray-400" value="">Não especificado</option>
+                {LEAD_SEGMENTS.map(s => (
                   <option className="bg-[#210606] text-white" key={s} value={s}>{s}</option>
                 ))}
               </select>
