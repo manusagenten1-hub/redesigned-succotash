@@ -20,9 +20,10 @@ export interface CalendarEvent { id: string; title: string; type: CalendarEventT
 export interface Expense { id: string; name: string; amount: number; category: ExpenseCategory; description?: string; date: string; type: ExpenseType; isActive: boolean; createdBy?: string; }
 export type GoalType = 'Vendas' | 'Faturamento';
 export type GoalPeriod = 'Semanal' | 'Mensal';
+export type LeadSegment = 'Clínicas' | 'Escritórios de Advocacia' | 'Escritórios de Contabilidade' | 'Deliveries' | 'Barbearias' | 'Salões' | 'Imobiliárias' | 'Academias' | 'Construtoras' | 'Restaurantes' | 'Lojas e Varejo' | 'B2B' | 'Outro';
 export interface Goal { id: string; type: GoalType; period: GoalPeriod; amount: number; date: string; }
 export interface AchievedGoal { id: string; goalId: string; goalType: GoalType; goalPeriod: GoalPeriod; amount: number; date: string; rewardText?: string; periodKey: string; status: 'Batida' | 'Não Batida'; }
-export interface Lead { id: string; name: string; companyName?: string; whatsapp: string; source: string; status: LeadStatus; notes?: string; date: string; createdBy?: string; }
+export interface Lead { id: string; name: string; companyName?: string; whatsapp: string; source: string; status: LeadStatus; segment?: LeadSegment; notes?: string; date: string; createdBy?: string; }
 
 interface AppContextType {
   isLoaded: boolean;
@@ -51,8 +52,8 @@ const parseRoles = (r: any) => {
 };
 const mTo = (m: Member) => ({ id: m.id, first_name: m.firstName, last_name: m.lastName, roles: m.roles, photo_url: m.photoUrl, is_pinned: m.isPinned, token: m.token });
 const mFr = (m: any): Member => ({ id: m.id, firstName: m.first_name || '', lastName: m.last_name || '', roles: parseRoles(m.roles), photoUrl: m.photo_url || '', isPinned: m.is_pinned || false, token: m.token });
-const lTo=(l: Lead)=>({ id: l.id, name: l.name, company_name: l.companyName, whatsapp: l.whatsapp, source: l.source, status: l.status, notes: l.notes, date: l.date, created_by: l.createdBy });
-const lFr=(l: any): Lead=>({ id: l.id, name: l.name, companyName: l.company_name, whatsapp: l.whatsapp, source: l.source, status: l.status, notes: l.notes, date: l.date, createdBy: l.created_by });
+const lTo=(l: Lead)=>({ id: l.id, name: l.name, company_name: l.companyName, whatsapp: l.whatsapp, source: l.source, status: l.status, segment: l.segment, notes: l.notes, date: l.date, created_by: l.createdBy });
+const lFr=(l: any): Lead=>({ id: l.id, name: l.name, companyName: l.company_name, whatsapp: l.whatsapp, source: l.source, status: l.status, segment: l.segment, notes: l.notes, date: l.date, createdBy: l.created_by });
 const sTo=(s: Sale)=>({ id: s.id, lead_id: s.leadId, category: s.category, business_type: s.businessType, company_name: s.companyName, owner_name: s.ownerName, whatsapp: s.whatsapp, site_url: s.siteUrl, price: s.price, mrr: s.mrr, date: s.date, responsible_id: s.responsibleId, indicator_id: s.indicatorId, created_by: s.createdBy });
 const sFr=(s: any): Sale=>({ id: s.id, leadId: s.lead_id, category: s.category, businessType: s.business_type, companyName: s.company_name, ownerName: s.owner_name, whatsapp: s.whatsapp, siteUrl: s.site_url, price: s.price, mrr: s.mrr, date: s.date, responsibleId: s.responsible_id, indicatorId: s.indicator_id, createdBy: s.created_by });
 const cTo=(c: Client)=>({ id: c.id, sale_id: c.saleId, lead_id: c.leadId, company_name: c.companyName, owner_name: c.ownerName, whatsapp: c.whatsapp, site_url: c.siteUrl, category: c.category, price: c.price, mrr: c.mrr, date: c.date, status: c.status, created_by: c.createdBy });
@@ -248,7 +249,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const up: any = {};
     if(u.name) up.name = u.name; if(u.companyName) up.company_name = u.companyName;
     if(u.whatsapp) up.whatsapp = u.whatsapp; if(u.source) up.source = u.source;
-    if(u.status) up.status = u.status; if(u.notes) up.notes = u.notes;
+    if(u.status) up.status = u.status; if(u.segment) up.segment = u.segment; if(u.notes) up.notes = u.notes;
     runUpdate('leads', id, up);
   };
   const deleteLead = (id: string) => { setLeads(p => p.filter(l => l.id !== id)); runDelete('leads', id); };
