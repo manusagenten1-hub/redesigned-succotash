@@ -247,9 +247,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const updateLead = (id: string, u: Partial<Omit<Lead, 'id' | 'date' | 'createdBy'>>) => {
     setLeads(p => p.map(l => l.id === id ? { ...l, ...u } : l));
     const up: any = {};
-    if(u.name) up.name = u.name; if(u.companyName) up.company_name = u.companyName;
-    if(u.whatsapp) up.whatsapp = u.whatsapp; if(u.source) up.source = u.source;
-    if(u.status) up.status = u.status; if(u.segment) up.segment = u.segment; if(u.notes) up.notes = u.notes;
+    if(u.name !== undefined) up.name = u.name; if(u.companyName !== undefined) up.company_name = u.companyName;
+    if(u.whatsapp !== undefined) up.whatsapp = u.whatsapp; if(u.source !== undefined) up.source = u.source;
+    if(u.status !== undefined) up.status = u.status; if(u.segment !== undefined) up.segment = u.segment; if(u.notes !== undefined) up.notes = u.notes;
     runUpdate('leads', id, up);
   };
   const deleteLead = (id: string) => { setLeads(p => p.filter(l => l.id !== id)); runDelete('leads', id); };
